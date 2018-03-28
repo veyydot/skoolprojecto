@@ -5,14 +5,16 @@
  */
 package sleutelbarricade;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import javax.swing.JComponent;
 
 /**
  *
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
-public class SleutelBarricade{
+public class SleutelBarricade extends JComponent{
     
     private boolean gameState;
     private String difficulty;
@@ -26,19 +28,24 @@ public class SleutelBarricade{
     private GameObject[][] initialField;
         
     public static void main(String[] args) {
-        Frame gameFrame = new Frame("SleutelBarricade", 750, 750);       
-        
+        Frame gameFrame = new Frame("SleutelBarricade", 570, 700); 
     }
     
-    public void loadGame(Graphics g){
-        Player player = new Player(0, 0);
-        int x = player.getX();
-        int y = player.getY();
-        player.render(g);
-        
-        
+    public void loadGame(){
+        //
+    }
+    
+    //Paint playField
+    public void paintComponent(Graphics g){
         playField = new GameObject[10][10];
         
-        playField[9][9] = new EndPoint(9, 9);
+        for(int rows = 0; rows<playField.length; rows++){
+            int rowPosition = rows*50;
+            for(int columns = 0; columns<playField[rows].length; columns++){
+                int columnPosition = columns*50;
+                g.setColor(Color.BLACK);
+                g.drawRect(30+columnPosition, 30+rowPosition, 50, 50);
+            }
+        }
     }
 }

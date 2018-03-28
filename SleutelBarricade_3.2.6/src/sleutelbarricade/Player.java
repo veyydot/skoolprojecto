@@ -12,22 +12,20 @@ import java.awt.Graphics;
  *
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
-public class Player {
+public class Player extends GameObject{
     
     private int x;
     private int y;
     private int inventory;
-    
-    public Player(int x, int y){
-        this.x = x;
-        this.y = y;
+
+    public Player(int x, int y) {
+        super(x, y);
         this.inventory = 0;
-    }
+    }  
     
     public void render(Graphics g){
         g.setColor(Color.red);
         g.drawRect(10, 10, 20, 20);
-       
     }
     
     public void pickUpKey(int value){
@@ -38,6 +36,7 @@ public class Player {
         return false;
     }
     
+    @Override
     public void display(){
         
     }
@@ -46,18 +45,22 @@ public class Player {
         return false;
     }
 
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public void setX(int x) {
         this.x = x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
 
+    @Override
     public void setY(int y) {
         this.y = y;
     }
@@ -69,5 +72,4 @@ public class Player {
     public void setInventory(int inventory) {
         this.inventory = inventory;
     }   
-    
 }

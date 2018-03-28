@@ -5,6 +5,8 @@
  */
 package sleutelbarricade;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
@@ -25,7 +27,9 @@ public abstract class GameObject {
         this.passCode = passCode;
     }
     
-    public void display(){};
+    public abstract void display();
+    
+    public abstract void render(Graphics g);
 
     public int getX() {
         return x;
@@ -50,5 +54,4 @@ public abstract class GameObject {
     public void setPassCode(int passCode) {
         this.passCode = passCode;
     } 
-    
 }
