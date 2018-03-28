@@ -44,11 +44,21 @@ public class SleutelBarricade extends JComponent{
         }
         Player player = new Player(31, 31);
         Key key = new Key(81, 31, 100);
-        playField[0][0] = player;
-        playField[0][1] = key;
+        Key key2 = new Key(131, 31, 100);
+        Wall wall1 = new Wall(31, 81);
+        EndPoint end = new EndPoint(481, 481);
+        Barricade barricade = new Barricade(31, 131, 100);
         key.initializeImages();
+        key2.initializeImages();
         player.initializeImages();
+        wall1.initializeImages();
+        end.initializeImages();
+        barricade.initializeImages();
         player.render(g);
         key.render(g);
+        key2.render(g);
+        wall1.render(g);
+        end.render(g);
+        barricade.render(g);
     }
 }

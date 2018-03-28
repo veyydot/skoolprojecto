@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  */
 public class Key extends GameObject{
     
-    private final String Key_IMG_PATH = "src/images/Key.jpg";    
+    private final String Key_IMG_PATH = "src/images/Key.jpeg";    
     private BufferedImage Key = null;
     
     public Key(int x, int y, int passCode) {

@@ -7,9 +7,9 @@ import java.awt.Graphics;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public abstract class GameObject {
-    private int x;
-    private int y;
-    private int passCode;
+    protected int x;
+    protected int y;
+    protected int passCode;
     
     public GameObject(int x, int y){
         setX(x);
