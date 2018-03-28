@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sleutelbarricade;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -17,15 +15,25 @@ public class Player extends GameObject{
     private int x;
     private int y;
     private int inventory;
+    private final String Player_IMG_PATH = "src/images/Player.jpeg";    
+    private BufferedImage Player = null;
 
     public Player(int x, int y) {
         super(x, y);
         this.inventory = 0;
     }  
+
+    public void initializeImages(){
+        try{
+            Player = ImageIO.read(new File(Player_IMG_PATH));
+                 
+        }catch(IOException exc){
+            exc.printStackTrace();
+        }
+    }    
     
     public void render(Graphics g){
-        g.setColor(Color.red);
-        g.drawRect(10, 10, 20, 20);
+        g.drawImage(Player, x, y, null);
     }
     
     public void pickUpKey(int value){

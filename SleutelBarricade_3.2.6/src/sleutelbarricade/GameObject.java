@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sleutelbarricade;
 
 import java.awt.Graphics;
@@ -17,14 +12,14 @@ public abstract class GameObject {
     private int passCode;
     
     public GameObject(int x, int y){
-        this.x = x;
-        this.y = y;
+        setX(x);
+        setY(y);
     }
     
     public GameObject(int x, int y, int passCode){
-        this.x = x;
-        this.y = y;
-        this.passCode = passCode;
+        setX(x);
+        setY(y);
+        setPassCode(passCode);
     }
     
     public abstract void display();

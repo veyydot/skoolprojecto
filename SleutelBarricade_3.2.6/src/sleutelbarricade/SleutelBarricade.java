@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sleutelbarricade;
 
 import java.awt.Color;
@@ -26,7 +21,7 @@ public class SleutelBarricade extends JComponent{
     private ArrayList<Key> keys = new ArrayList<>();
     private GameObject[][] playField;
     private GameObject[][] initialField;
-        
+    
     public static void main(String[] args) {
         Frame gameFrame = new Frame("SleutelBarricade", 570, 700); 
     }
@@ -47,5 +42,13 @@ public class SleutelBarricade extends JComponent{
                 g.drawRect(30+columnPosition, 30+rowPosition, 50, 50);
             }
         }
+        Player player = new Player(31, 31);
+        Key key = new Key(81, 31, 100);
+        playField[0][0] = player;
+        playField[0][1] = key;
+        key.initializeImages();
+        player.initializeImages();
+        player.render(g);
+        key.render(g);
     }
 }
