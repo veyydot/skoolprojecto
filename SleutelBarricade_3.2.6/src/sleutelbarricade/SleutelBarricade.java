@@ -3,6 +3,7 @@ package sleutelbarricade;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JComponent;
 
 /**
@@ -43,11 +44,11 @@ public class SleutelBarricade extends JComponent{
             }
         }
         Player player = new Player(31, 31);
-        Key key = new Key(81, 31, 100);
-        Key key2 = new Key(131, 31, 100);
-        Wall wall1 = new Wall(31, 81);
+        Key key = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31 , 100);
+        Key key2 = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31, 100);
+        Wall wall1 = new Wall(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31);
         EndPoint end = new EndPoint(481, 481);
-        Barricade barricade = new Barricade(31, 131, 100);
+        Barricade barricade = new Barricade(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31, 100);
         key.initializeImages();
         key2.initializeImages();
         player.initializeImages();
