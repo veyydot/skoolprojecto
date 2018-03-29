@@ -36,9 +36,10 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private Wall wall1;
     private EndPoint end;
     private Barricade barricade1;
-    private Timer t = new Timer(50, this);
+    private final Timer t;
     
     public SleutelBarricade(){
+        this.t = new Timer(50, this);
         t.start();
         addKeyListener(this);
     }
@@ -46,22 +47,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         Frame gameFrame = new Frame("SleutelBarricade", 570, 700);
     }
     
-    public void loadGame(){
-        //
-    }
-    
-    //Paint playField
-    public void paintComponent(Graphics g){
-        playField = new GameObject[10][10];
-        
-        for(int rows = 0; rows<playField.length; rows++){
-            int rowPosition = rows*50;
-            for(int columns = 0; columns<playField[rows].length; columns++){
-                int columnPosition = columns*50;
-                g.setColor(Color.BLACK);
-                g.drawRect(30+columnPosition, 30+rowPosition, 50, 50);
-            }
-        }
+    public void loadGame(Graphics g){
         player = new Player(31, 31);
         key = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31 , 100);
         key2 = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31, 100);
@@ -86,16 +72,32 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         barricade1.render(g);
         
         ArrayList<GameObject> objectarray = new ArrayList<GameObject>();
-         objectarray.add(key);
-         objectarray.add(key2);
-         Iterator itr = objectarray.iterator();
-         while(itr.hasNext()){
-             GameObject gameObject = (GameObject)itr.next();
-         System.out.println("X as is :" + gameObject.x + " Y as is : "+ gameObject.y + "passcode is : " + gameObject.passCode);
+        objectarray.add(key);
+        objectarray.add(key2);
+        Iterator itr = objectarray.iterator();
+        while(itr.hasNext()){
+            GameObject gameObject = (GameObject)itr.next();
+            System.out.println("X as is :" + (1+(gameObject.x-31)/50) + " Y as is : "+ (1+(gameObject.y-31)/50) + " passcode is : " + gameObject.passCode);
+        }
     }
+    
+    //Paint playField
+    public void paintComponent(Graphics g){
+        playField = new GameObject[10][10];
+        
+        for(int rows = 0; rows<playField.length; rows++){
+            int rowPosition = rows*50;
+            for(int columns = 0; columns<playField[rows].length; columns++){
+                int columnPosition = columns*50;
+                g.setColor(Color.BLACK);
+                g.drawRect(30+columnPosition, 30+rowPosition, 50, 50);
+            }
+        }
+        loadGame(g);
     }
+    
     public void actionPerformed(ActionEvent e){
-//        repaint();
+//        we moeten nog uitzoeken hoe we 1 object laten moven en niet alles
     }
     
     @Override
