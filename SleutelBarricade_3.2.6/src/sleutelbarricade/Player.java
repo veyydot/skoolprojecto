@@ -18,10 +18,9 @@ public class Player extends GameObject{
     private BufferedImage Player = null;
     private Graphics g;
     
-    public Player(int x, int y, boolean isFull) {
-        super(x, y, isFull);
+    public Player(String objectName, int x, int y, boolean isFull) {
+        super(objectName, x, y, isFull);
         this.inventory = 0;
-
     }  
 
     @Override
@@ -78,6 +77,4 @@ public class Player extends GameObject{
     public void setInventory(int inventory) {
         this.inventory = inventory;
     }
-    
-    
 }

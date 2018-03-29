@@ -15,8 +15,8 @@ public class Barricade extends GameObject{
     private final String Barricade_IMG_PATH = "src/images/Barricade.jpg";    
     private BufferedImage Barricade = null;
     
-    public Barricade(int x, int y, int passCode, boolean isFull) {
-        super(x, y, passCode, isFull);
+    public Barricade(String objectName, int x, int y, int passCode, boolean isFull) {
+        super(objectName, x, y, passCode, isFull);
     }
     
     @Override

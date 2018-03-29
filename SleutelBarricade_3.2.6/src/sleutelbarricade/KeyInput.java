@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
  */
 public class KeyInput extends KeyAdapter{
     
-    SleutelBarricade sb = new SleutelBarricade();
+    SleutelBarricade sb;
     
     public KeyInput(){
         
@@ -23,24 +23,17 @@ public class KeyInput extends KeyAdapter{
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         
-        for(int i = 0; i<sb.getObjects().size(); i++){
-            GameObject temporaryObjects = sb.getObjects().get(i);
-            
-            //??????????? Hier even checken
-            if(temporaryObjects.getX() == 37 && temporaryObjects.getY() == 37){
-                if(keyCode == KeyEvent.VK_UP) {
-                    System.out.println("UP");
-                }
-                if(keyCode == KeyEvent.VK_DOWN) {
-                    System.out.println("DOWN");
-                }
-                if(keyCode == KeyEvent.VK_LEFT) {
-                    System.out.println("LEFT");
-                }
-                if(keyCode == KeyEvent.VK_RIGHT) {
-                    System.out.println("RIGHT");
-                }
-            }
+        if(keyCode == KeyEvent.VK_UP) {
+            System.out.println("UP");
+        }
+        if(keyCode == KeyEvent.VK_DOWN) {
+            System.out.println("DOWN");
+        }
+        if(keyCode == KeyEvent.VK_LEFT) {
+            System.out.println("LEFT");
+        }
+        if(keyCode == KeyEvent.VK_RIGHT) {
+            System.out.println("RIGHT");
         }
     }
     
@@ -48,7 +41,7 @@ public class KeyInput extends KeyAdapter{
         int keyCode = e.getKeyCode();
         
         if(keyCode == KeyEvent.VK_UP) {
-            
+            System.out.println("UP presseddown");
         }
         if(keyCode == KeyEvent.VK_DOWN) {
             
@@ -64,4 +57,19 @@ public class KeyInput extends KeyAdapter{
     public void keyTyped(KeyEvent arg0) {
 
     }
+    
+//    public void keyPressed(KeyEvent e){
+//        int key = e.getKeyCode();
+//        
+//        for(int i=0; i<handler.objects.size(); i++){
+//            GameObject temporaryObject = handler.objects.get(i);
+//            
+//            if(temporaryObject.getId() == ID.Player){
+//                if(key == KeyEvent.VK_W) handler.setUp(true);
+//                if(key == KeyEvent.VK_A) handler.setLeft(true);
+//                if(key == KeyEvent.VK_S) handler.setDown(true);
+//                if(key == KeyEvent.VK_D) handler.setRight(true);
+//            }
+//        }
+//    }
 }

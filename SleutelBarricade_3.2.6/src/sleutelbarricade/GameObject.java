@@ -7,18 +7,21 @@ import java.awt.Graphics;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public abstract class GameObject {
+    protected String objectName;
     protected int x;
     protected int y;
     protected int passCode;
     protected boolean isFull = false;
     
-    public GameObject(int x, int y, boolean isFull){
+    public GameObject(String objectName, int x, int y, boolean isFull){
+        setObjectName(objectName);
         setX(x);
         setY(y);
         isFull = true;
     }
     
-    public GameObject(int x, int y, int passCode, boolean isFull){
+    public GameObject(String objectName, int x, int y, int passCode, boolean isFull){
+        setObjectName(objectName);
         setX(x);
         setY(y);
         setPassCode(passCode);
@@ -29,6 +32,14 @@ public abstract class GameObject {
     
     public abstract void render(Graphics g);
 
+    public String getObjectName() {
+        return objectName;
+    }
+
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
+    
     public int getX() {
         return x;
     }
