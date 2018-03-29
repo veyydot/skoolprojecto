@@ -22,9 +22,13 @@ public class Frame extends JFrame {
         sleutelBarricade.setPreferredSize(new Dimension(width, height));
         this.add(sleutelBarricade);
        
-        this.setResizable(false);
+        this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);        
-    }  
+    }
+    
+    public static void main(String[] args) {
+        Frame gameFrame = new Frame("SleutelBarricade", 570, 700);
+    }
 }

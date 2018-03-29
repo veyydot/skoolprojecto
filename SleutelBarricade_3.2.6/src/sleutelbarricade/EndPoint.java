@@ -19,6 +19,7 @@ public class EndPoint extends GameObject{
         super(x, y);
     }
     
+    @Override
     public void initializeImages(){
         try{
             EndPoint = ImageIO.read(new File(EndPoint_IMG_PATH));
@@ -27,11 +28,7 @@ public class EndPoint extends GameObject{
             exc.printStackTrace();
         }
     }
-    @Override
-    public void display() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+   
     @Override
     public void render(Graphics g) {
         g.drawImage(EndPoint, x, y, null);

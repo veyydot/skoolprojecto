@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -30,6 +31,7 @@ public class Player extends GameObject{
 
     }  
 
+    @Override
     public void initializeImages(){
         try{
             Player = ImageIO.read(new File(Player_IMG_PATH));
@@ -45,16 +47,15 @@ public class Player extends GameObject{
     }
     
     public void pickUpKey(int value){
-        
+
     }
     
     public boolean unlockBarricade(int keyValue, int barricadeValue){
-        return false;
-    }
-    
-    @Override
-    public void display(){
-        
+        if(keyValue == barricadeValue){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     public boolean movePossible(){

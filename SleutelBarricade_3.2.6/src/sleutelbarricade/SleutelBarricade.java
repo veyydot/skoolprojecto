@@ -26,38 +26,34 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private ArrayList<Wall> walls = new ArrayList<>();
     private ArrayList<Barricade> barricade = new ArrayList<>();
     private ArrayList<Key> keys = new ArrayList<>();
-    private GameObject[][] playField;
+    private GameObject[][] playField = new GameObject[10][10];
     private GameObject[][] initialField;
     private Graphics g;
     
-    private Player player;
-    private Key key;
-    private Key key2;
-    private Wall wall1;
-    private EndPoint end;
-    private Barricade barricade1;
+    private Player player = new Player(37,37);
+    private Key key = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37 , 100);
+    private Key key2 = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37, 100);
+    private Wall wall1 = new Wall(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37);
+    private EndPoint end = new EndPoint(487, 487);
+    private Barricade barricade1 = new Barricade(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37, 100);
     private final Timer t;
-    
+
     public SleutelBarricade(){
         this.t = new Timer(50, this);
         t.start();
         addKeyListener(this);
     }
-    public static void main(String[] args) {
-        Frame gameFrame = new Frame("SleutelBarricade", 570, 700);
-    }
-    
-    public void loadGame(Graphics g){
-        player = new Player(31, 31);
-        key = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31 , 100);
-        key2 = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31, 100);
-        if(key2.getX() == key.getX() && key2.getY() == key.getY()){
-            key2.setX(ThreadLocalRandom.current().nextInt(0,9)*50+31);
-            key2.setY(ThreadLocalRandom.current().nextInt(0,9)*50+31);
+    public void addToList(){
+        ArrayList<GameObject> objectarray = new ArrayList<GameObject>();
+        objectarray.add(key);
+        objectarray.add(key2);
+        Iterator itr = objectarray.iterator();
+        while(itr.hasNext()){
+            GameObject gameObject = (GameObject)itr.next();
+            System.out.println("X as is :" + (1+(gameObject.x-31)/50) + " Y as is : "+ (1+(gameObject.y-31)/50) + " passcode is : " + gameObject.passCode);
         }
-        wall1 = new Wall(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31);
-        end = new EndPoint(481, 481);
-        barricade1 = new Barricade(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31, 100);
+    }
+    public void loadGame(Graphics g){
         key.initializeImages();
         key2.initializeImages();
         player.initializeImages();
@@ -70,27 +66,18 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         wall1.render(g);
         end.render(g);
         barricade1.render(g);
-        
-        ArrayList<GameObject> objectarray = new ArrayList<GameObject>();
-        objectarray.add(key);
-        objectarray.add(key2);
-        Iterator itr = objectarray.iterator();
-        while(itr.hasNext()){
-            GameObject gameObject = (GameObject)itr.next();
-            System.out.println("X as is :" + (1+(gameObject.x-31)/50) + " Y as is : "+ (1+(gameObject.y-31)/50) + " passcode is : " + gameObject.passCode);
-        }
     }
     
     //Paint playField
     public void paintComponent(Graphics g){
-        playField = new GameObject[10][10];
-        
         for(int rows = 0; rows<playField.length; rows++){
             int rowPosition = rows*50;
             for(int columns = 0; columns<playField[rows].length; columns++){
                 int columnPosition = columns*50;
                 g.setColor(Color.BLACK);
                 g.drawRect(30+columnPosition, 30+rowPosition, 50, 50);
+                g.setColor(Color.decode("#F7F7F7"));
+                g.fillRect(31+columnPosition, 31+rowPosition, 48, 48);
             }
         }
         loadGame(g);

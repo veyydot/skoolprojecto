@@ -12,14 +12,15 @@ import javax.imageio.ImageIO;
  */
 public class Wall extends GameObject{
     
-    private final String Wall_IMG_PATH = "src/images/Muur.jpg";    
+    private final String Wall_IMG_PATH = "src/images/Muur.jpeg";    
     private BufferedImage Wall = null;
     
     public Wall(int x, int y) {
         super(x, y);
     }
     
-        public void initializeImages(){
+    @Override
+    public void initializeImages(){
         try{
             Wall = ImageIO.read(new File(Wall_IMG_PATH));
                  
@@ -28,11 +29,6 @@ public class Wall extends GameObject{
         }
     }  
         
-    @Override
-    public void display() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public void render(Graphics g) {
         g.drawImage(Wall, x, y, null);

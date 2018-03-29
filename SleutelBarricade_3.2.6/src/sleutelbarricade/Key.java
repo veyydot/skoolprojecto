@@ -19,6 +19,7 @@ public class Key extends GameObject{
         super(x, y, passCode);
     }
     
+    @Override
     public void initializeImages(){
         try{
             Key = ImageIO.read(new File(Key_IMG_PATH));
@@ -26,11 +27,6 @@ public class Key extends GameObject{
         }catch(IOException exc){
             exc.printStackTrace();
         }
-    }
-
-    @Override
-    public void display() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

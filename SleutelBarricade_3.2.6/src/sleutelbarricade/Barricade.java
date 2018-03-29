@@ -19,6 +19,7 @@ public class Barricade extends GameObject{
         super(x, y, passCode);
     }
     
+    @Override
     public void initializeImages(){
         try{
             Barricade = ImageIO.read(new File(Barricade_IMG_PATH));
@@ -28,11 +29,6 @@ public class Barricade extends GameObject{
         }
     }
     
-    @Override
-    public void display() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public void render(Graphics g) {
         g.drawImage(Barricade, x, y, null);

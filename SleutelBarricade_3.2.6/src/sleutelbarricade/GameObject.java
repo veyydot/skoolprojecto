@@ -22,8 +22,7 @@ public abstract class GameObject {
         setPassCode(passCode);
     }
     
-    public abstract void display();
-    
+    public abstract void initializeImages();
     public abstract void render(Graphics g);
 
     public int getX() {
