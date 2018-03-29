@@ -26,6 +26,7 @@ public abstract class GameObject {
     }
     
     public abstract void initializeImages();
+    
     public abstract void render(Graphics g);
 
     public int getX() {

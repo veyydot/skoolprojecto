@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JComponent;
 import javax.swing.Timer;
@@ -17,29 +17,31 @@ import javax.swing.Timer;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public class SleutelBarricade extends JComponent implements KeyListener, ActionListener{
-    
-    private boolean gameState;
+     
 //    private String difficulty;
 //    private int amountOfWalls;
 //    private int amountofBarricades;
-//    private int amountofKeys;    
+//    private int amountofKeys;  
+//    private GameObject[][] initialField;
+    
+    private boolean gameState;    
     private ArrayList<GameObject> objectArray;
     private GameObject[][] playField = new GameObject[10][10];
-//    private GameObject[][] initialField;
-    private Graphics g;
-    
+    private Graphics g;    
     private Player player = new Player(37,37, true);
-    private EndPoint end = new EndPoint(487, 487, true);
+    private EndPoint endPoint = new EndPoint(487, 487, true);
     private final Timer t;
 
     public SleutelBarricade(){
         this.t = new Timer(50, this);
         t.start();
-        addKeyListener(this);
+        this.addKeyListener(new KeyInput());
     }
     
     public void addToList(){
         objectArray = new ArrayList<>();
+        objectArray.add(player);
+        objectArray.add(endPoint);
         int keys = 3;
         int walls = 15;
         int barricades = 15;
@@ -53,8 +55,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             int y = 0;
             int passCode = ThreadLocalRandom.current().nextInt(1,3)*100;
             while(gameObjects[x][y]){
-                x = ThreadLocalRandom.current().nextInt(0,9);
-                y = ThreadLocalRandom.current().nextInt(0,9);
+                x = new Random().nextInt(gameObjects.length);
+                y = new Random().nextInt(gameObjects[i].length);
             }
             gameObjects[x][y] = true;
             objectArray.add(new Key(x*50+37, y*50+37, passCode, true));             
@@ -65,8 +67,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             int x = 0;
             int y = 0;
             while(gameObjects[x][y]){
-                x = ThreadLocalRandom.current().nextInt(0,9);
-                y = ThreadLocalRandom.current().nextInt(0,9);
+                x = ThreadLocalRandom.current().nextInt(0,10);
+                y = ThreadLocalRandom.current().nextInt(0,10);
             }
             gameObjects[x][y] = true;
             objectArray.add(new Wall(x*50+37, y*50+37, true));
@@ -78,23 +80,20 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             int y = 0;
             int passCode = ThreadLocalRandom.current().nextInt(1,3)*100;
             while(gameObjects[x][y]){
-                x = ThreadLocalRandom.current().nextInt(0,9);
-                y = ThreadLocalRandom.current().nextInt(0,9);
+                x = ThreadLocalRandom.current().nextInt(0,10);
+                y = ThreadLocalRandom.current().nextInt(0,10);
             }
             gameObjects[x][y] = true;
             objectArray.add(new Barricade(x*50+37, y*50+37,passCode, true));
         }
     }
+    
     public void loadGame(Graphics g){
         addToList();
         for(int i = 0; i<objectArray.size(); i++){
             objectArray.get(i).initializeImages();
             objectArray.get(i).render(g);  
         }
-        player.initializeImages();
-        end.initializeImages();
-        player.render(g);
-        end.render(g);
     }
     
     //Paint playField
@@ -110,6 +109,10 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             }
         }
         loadGame(g);
+    }
+    
+    public ArrayList<GameObject> getObjects(){
+        return objectArray;
     }
     
     public void actionPerformed(ActionEvent e){
