@@ -1,17 +1,10 @@
 package sleutelbarricade;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
 
 /**
  *
@@ -25,8 +18,8 @@ public class Player extends GameObject{
     private BufferedImage Player = null;
     private Graphics g;
     
-    public Player(int x, int y) {
-        super(x, y);
+    public Player(int x, int y, boolean isFull) {
+        super(x, y, isFull);
         this.inventory = 0;
 
     }  
@@ -51,11 +44,7 @@ public class Player extends GameObject{
     }
     
     public boolean unlockBarricade(int keyValue, int barricadeValue){
-        if(keyValue == barricadeValue){
-            return true;
-        }else{
-            return false;
-        }
+        return keyValue == barricadeValue;
     }
     
     public boolean movePossible(){

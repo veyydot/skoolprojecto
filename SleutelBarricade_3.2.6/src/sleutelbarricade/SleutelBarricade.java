@@ -19,23 +19,17 @@ import javax.swing.Timer;
 public class SleutelBarricade extends JComponent implements KeyListener, ActionListener{
     
     private boolean gameState;
-    private String difficulty;
-    private int amountOfWalls;
-    private int amountofBarricades;
-    private int amountofKeys;    
-    private ArrayList<Wall> walls = new ArrayList<>();
-    private ArrayList<Barricade> barricade = new ArrayList<>();
-    private ArrayList<Key> keys = new ArrayList<>();
+//    private String difficulty;
+//    private int amountOfWalls;
+//    private int amountofBarricades;
+//    private int amountofKeys;    
+    private ArrayList<GameObject> objectArray;
     private GameObject[][] playField = new GameObject[10][10];
-    private GameObject[][] initialField;
+//    private GameObject[][] initialField;
     private Graphics g;
     
-    private Player player = new Player(37,37);
-    private Key key = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37 , 100);
-    private Key key2 = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37, 100);
-    private Wall wall1 = new Wall(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37);
-    private EndPoint end = new EndPoint(487, 487);
-    private Barricade barricade1 = new Barricade(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37, 100);
+    private Player player = new Player(37,37, true);
+    private EndPoint end = new EndPoint(487, 487, true);
     private final Timer t;
 
     public SleutelBarricade(){
@@ -43,29 +37,32 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         t.start();
         addKeyListener(this);
     }
+    
     public void addToList(){
-        ArrayList<GameObject> objectarray = new ArrayList<GameObject>();
-        objectarray.add(key);
-        objectarray.add(key2);
-        Iterator itr = objectarray.iterator();
+        objectArray = new ArrayList<>();
+        for(int i = 0; i<5; i++){
+            int x = ThreadLocalRandom.current().nextInt(0,9)*50+37;
+            int y = ThreadLocalRandom.current().nextInt(0,9)*50+37;
+            int passCode = ThreadLocalRandom.current().nextInt(1,3)*100;
+            objectArray.add(new Key(x,y, passCode, true));
+        }
+        objectArray.add(new Wall(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37, true));
+        Iterator itr = objectArray.iterator();
         while(itr.hasNext()){
             GameObject gameObject = (GameObject)itr.next();
             System.out.println("X as is :" + (1+(gameObject.x-31)/50) + " Y as is : "+ (1+(gameObject.y-31)/50) + " passcode is : " + gameObject.passCode);
         }
     }
     public void loadGame(Graphics g){
-        key.initializeImages();
-        key2.initializeImages();
+        addToList();
+        for(int i = 0; i<objectArray.size(); i++){
+            objectArray.get(i).initializeImages();
+            objectArray.get(i).render(g);  
+        }
         player.initializeImages();
-        wall1.initializeImages();
         end.initializeImages();
-        barricade1.initializeImages();
         player.render(g);
-        key.render(g);
-        key2.render(g);
-        wall1.render(g);
         end.render(g);
-        barricade1.render(g);
     }
     
     //Paint playField

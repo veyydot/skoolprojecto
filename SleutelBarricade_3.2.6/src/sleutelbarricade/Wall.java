@@ -15,8 +15,8 @@ public class Wall extends GameObject{
     private final String Wall_IMG_PATH = "src/images/Muur.jpeg";    
     private BufferedImage Wall = null;
     
-    public Wall(int x, int y) {
-        super(x, y);
+    public Wall(int x, int y, boolean isFull) {
+        super(x, y, isFull);
     }
     
     @Override

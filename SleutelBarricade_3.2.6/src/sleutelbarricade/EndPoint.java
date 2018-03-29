@@ -15,8 +15,8 @@ public class EndPoint extends GameObject{
         private final String EndPoint_IMG_PATH = "src/images/EndPoint.jpg";    
         private BufferedImage EndPoint = null;
     
-    public EndPoint(int x, int y) {
-        super(x, y);
+    public EndPoint(int x, int y, boolean isFull) {
+        super(x, y, isFull);
     }
     
     @Override

@@ -10,16 +10,19 @@ public abstract class GameObject {
     protected int x;
     protected int y;
     protected int passCode;
+    protected boolean isFull = false;
     
-    public GameObject(int x, int y){
+    public GameObject(int x, int y, boolean isFull){
         setX(x);
         setY(y);
+        isFull = true;
     }
     
-    public GameObject(int x, int y, int passCode){
+    public GameObject(int x, int y, int passCode, boolean isFull){
         setX(x);
         setY(y);
         setPassCode(passCode);
+        isFull = true;
     }
     
     public abstract void initializeImages();
