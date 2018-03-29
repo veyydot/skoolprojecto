@@ -64,6 +64,10 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         player = new Player(31, 31);
         key = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31 , 100);
         key2 = new Key(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31, 100);
+        if(key2.getX() == key.getX() && key2.getY() == key.getY()){
+            key2.setX(ThreadLocalRandom.current().nextInt(0,9)*50+31);
+            key2.setY(ThreadLocalRandom.current().nextInt(0,9)*50+31);
+        }
         wall1 = new Wall(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31);
         end = new EndPoint(481, 481);
         barricade1 = new Barricade(ThreadLocalRandom.current().nextInt(0,9)*50+31, ThreadLocalRandom.current().nextInt(0,9)*50+31, 100);
