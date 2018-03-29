@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JComponent;
 import javax.swing.Timer;
@@ -79,8 +80,16 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         wall1.render(g);
         end.render(g);
         barricade1.render(g);
+        
+        ArrayList<GameObject> objectarray = new ArrayList<GameObject>();
+         objectarray.add(key);
+         objectarray.add(key2);
+         Iterator itr = objectarray.iterator();
+         while(itr.hasNext()){
+             GameObject gameObject = (GameObject)itr.next();
+         System.out.println("X as is :" + gameObject.x + " Y as is : "+ gameObject.y + "passcode is : " + gameObject.passCode);
     }
-    
+    }
     public void actionPerformed(ActionEvent e){
 //        repaint();
     }
