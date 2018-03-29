@@ -40,17 +40,49 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     
     public void addToList(){
         objectArray = new ArrayList<>();
-        for(int i = 0; i<5; i++){
-            int x = ThreadLocalRandom.current().nextInt(0,9)*50+37;
-            int y = ThreadLocalRandom.current().nextInt(0,9)*50+37;
+        int keys = 3;
+        int walls = 15;
+        int barricades = 15;
+        
+        boolean[][] gameObjects = new boolean[10][10];
+        gameObjects[0][0] = true;
+        gameObjects[9][9] = true;
+        //Add Keys
+        for(int  i = 0 ; i< keys ; i++){
+            int x = 0 ;
+            int y = 0;
             int passCode = ThreadLocalRandom.current().nextInt(1,3)*100;
-            objectArray.add(new Key(x,y, passCode, true));
+            while(gameObjects[x][y]){
+                x = ThreadLocalRandom.current().nextInt(0,9);
+                y = ThreadLocalRandom.current().nextInt(0,9);
+            }
+            gameObjects[x][y] = true;
+            objectArray.add(new Key(x*50+37, y*50+37, passCode, true));             
         }
-        objectArray.add(new Wall(ThreadLocalRandom.current().nextInt(0,9)*50+37, ThreadLocalRandom.current().nextInt(0,9)*50+37, true));
-        Iterator itr = objectArray.iterator();
-        while(itr.hasNext()){
-            GameObject gameObject = (GameObject)itr.next();
-            System.out.println("X as is :" + (1+(gameObject.x-31)/50) + " Y as is : "+ (1+(gameObject.y-31)/50) + " passcode is : " + gameObject.passCode);
+        
+        //Add Walls
+        for(int i = 0; i<walls; i++){
+            int x = 0;
+            int y = 0;
+            while(gameObjects[x][y]){
+                x = ThreadLocalRandom.current().nextInt(0,9);
+                y = ThreadLocalRandom.current().nextInt(0,9);
+            }
+            gameObjects[x][y] = true;
+            objectArray.add(new Wall(x*50+37, y*50+37, true));
+        }
+        
+        //Add Barricades
+        for(int i = 0; i<barricades; i++){
+            int x = 0;
+            int y = 0;
+            int passCode = ThreadLocalRandom.current().nextInt(1,3)*100;
+            while(gameObjects[x][y]){
+                x = ThreadLocalRandom.current().nextInt(0,9);
+                y = ThreadLocalRandom.current().nextInt(0,9);
+            }
+            gameObjects[x][y] = true;
+            objectArray.add(new Barricade(x*50+37, y*50+37,passCode, true));
         }
     }
     public void loadGame(Graphics g){
