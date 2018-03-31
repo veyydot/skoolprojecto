@@ -33,23 +33,24 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private final Timer t;
 
     public SleutelBarricade(){
-        this.t = new Timer(50, this);
+        this.t = new Timer(5, this);
         t.start();
-        this.addKeyListener(new KeyInput());
+        addKeyListener(this);
         setFocusable(true);
     }
     
     public void addToList(){
-        objectArray = new ArrayList<>();
+        objectArray = new ArrayList<>();        
         objectArray.add(player);
         objectArray.add(endPoint);
         int keys = 3;
         int walls = 15;
         int barricades = 15;
         
-        boolean[][] gameObjects = new boolean[10][10];
+        boolean[][] gameObjects = new boolean[10][10];        
         gameObjects[0][0] = true;
         gameObjects[9][9] = true;
+        
         //Add Keys
         for(int  i = 0 ; i< keys ; i++){
             int x = 0 ;
@@ -117,31 +118,41 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     }
     
     public void actionPerformed(ActionEvent e){
-//        we moeten nog uitzoeken hoe we 1 object laten moven en niet alles
+        
     }
     
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
+        
         if(keyCode == KeyEvent.VK_UP) {
+            
         }
         if(keyCode == KeyEvent.VK_DOWN) {
+            System.out.println("done");
         }
         if(keyCode == KeyEvent.VK_LEFT) {
+
         }
         if(keyCode == KeyEvent.VK_RIGHT) {
+
         }
     }
+      
     @Override
     public void keyReleased(KeyEvent e) {
         int keyCode = e.getKeyCode();
         if(keyCode == KeyEvent.VK_UP) {
+            
         }
         if(keyCode == KeyEvent.VK_DOWN) {
+            
         }
         if(keyCode == KeyEvent.VK_LEFT) {
+            
         }
         if(keyCode == KeyEvent.VK_RIGHT) {
+            
         }
     }
 

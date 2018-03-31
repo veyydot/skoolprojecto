@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javafx.scene.input.KeyEvent;
 import javax.imageio.ImageIO;
 
 /**
@@ -11,8 +12,7 @@ import javax.imageio.ImageIO;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public class Player extends GameObject{
-    private int x;
-    private int y;
+    private int x, y;
     private int inventory;
     private final String Player_IMG_PATH = "src/images/Player.jpeg";    
     private BufferedImage Player = null;
@@ -31,6 +31,15 @@ public class Player extends GameObject{
         }catch(IOException exc){
             exc.printStackTrace();
         }
+    }
+    
+    public void move(KeyEvent e){
+        
+    }
+    
+    public void moveDown(){
+        x = -37;
+        y = 0;
     }
     
     @Override

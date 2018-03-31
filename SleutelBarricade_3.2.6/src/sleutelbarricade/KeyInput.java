@@ -23,6 +23,8 @@ public class KeyInput extends KeyAdapter{
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         
+        System.out.println(sb.getObjects().get(0).getObjectName());
+        
         if(keyCode == KeyEvent.VK_UP) {
             System.out.println("UP");
         }
