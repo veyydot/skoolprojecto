@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javafx.scene.input.KeyEvent;
 import javax.imageio.ImageIO;
 
 /**
@@ -33,13 +32,24 @@ public class Player extends GameObject{
         }
     }
     
-    public void move(KeyEvent e){
-        
+    public void moveDown(){
+        x = x + 0;
+        y = y + 50;
     }
     
-    public void moveDown(){
-        x = -37;
-        y = 0;
+    public void moveUp(){
+        x = x + 0;
+        y = y - 50;
+    }
+    
+    public void moveRight(){
+        x = x + 50;
+        y = y + 0;
+    }
+    
+    public void moveLeft(){
+        x = x - 50;
+        y = y + 0;
     }
     
     @Override
@@ -77,8 +87,8 @@ public class Player extends GameObject{
     @Override
     public void setY(int y) {
         this.y = y;
-    }
-
+    }   
+    
     public int getInventory() {
         return inventory;
     }

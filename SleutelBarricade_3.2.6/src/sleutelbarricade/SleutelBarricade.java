@@ -95,11 +95,12 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         }
     }
     
+    //Loads the game with all the Objects
     public void loadGame(Graphics g){
         addToList();
         for(int i = 0; i<objectArray.size(); i++){
             objectArray.get(i).initializeImages();
-            objectArray.get(i).render(g);  
+            objectArray.get(i).render(g);
         }
     }
     
@@ -125,23 +126,26 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     public void actionPerformed(ActionEvent e){
         
     }
+
     
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         
         if(keyCode == KeyEvent.VK_UP) {
-            
+            player.moveUp();
         }
         if(keyCode == KeyEvent.VK_DOWN) {
             System.out.println("done");
+            player.moveDown();
         }
         if(keyCode == KeyEvent.VK_LEFT) {
-
+            player.moveLeft();
         }
         if(keyCode == KeyEvent.VK_RIGHT) {
-
+            player.moveRight();
         }
+        repaint();
     }
       
     @Override
@@ -162,7 +166,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     }
 
     @Override
-    public void keyTyped(KeyEvent arg0) {
+    public void keyTyped(KeyEvent e) {
 
     }
 }
