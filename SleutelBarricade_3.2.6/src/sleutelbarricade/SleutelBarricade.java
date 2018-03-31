@@ -50,6 +50,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         boolean[][] gameObjects = new boolean[10][10];        
         gameObjects[0][0] = true;
         gameObjects[9][9] = true;
+        playField[0][0] = player;
+        playField[9][9] = endPoint;
         
         //Add Keys
         for(int  i = 0 ; i< keys ; i++){
@@ -62,6 +64,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             }
             gameObjects[x][y] = true;
             objectArray.add(new Key("Key", x*50+37, y*50+37, passCode, true));             
+            playField[x][y] = objectArray.get(i+2);
         }
         
         //Add Walls
@@ -74,6 +77,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             }
             gameObjects[x][y] = true;
             objectArray.add(new Wall("Wall", x*50+37, y*50+37, true));
+            playField[x][y] = objectArray.get(i+keys+2);
         }
         
         //Add Barricades
@@ -87,6 +91,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             }
             gameObjects[x][y] = true;
             objectArray.add(new Barricade("Barricade", x*50+37, y*50+37,passCode, true));
+            playField[x][y] = objectArray.get(i+keys+walls+2);
         }
     }
     
