@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
  */
 public class Player extends GameObject{
     private int x, y;
+    private int imgW, imgH;
+    private int[] imgP;
     private int inventory;
     private final String Player_IMG_PATH = "src/images/Player.jpeg";    
     private BufferedImage Player = null;
@@ -30,6 +32,10 @@ public class Player extends GameObject{
         }catch(IOException exc){
             exc.printStackTrace();
         }
+        
+        imgW = Player.getWidth();
+        imgH = Player.getHeight();
+        imgP = Player.getRGB(0, 0, imgW, imgH, null, 0, imgW);
     }
     
     public void moveDown(){

@@ -22,11 +22,12 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
 //    private int amountOfWalls;
 //    private int amountofBarricades;
 //    private int amountofKeys;  
-//    private GameObject[][] initialField;
+    private GameObject[][] initialField;
     
     private boolean gameState;    
-    private ArrayList<GameObject> objectArray;
+    private ArrayList<GameObject> objectArray = new ArrayList<>();
     private GameObject[][] playField = new GameObject[10][10];
+    boolean[][] gameObjects = new boolean[10][10];
     private Graphics g;    
     private Player player = new Player("Player", 37, 37, true);
     private EndPoint endPoint = new EndPoint("EndPoint", 487, 487, true);
@@ -39,19 +40,17 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         setFocusable(true);
     }
     
-    public void addToList(){
-        objectArray = new ArrayList<>();        
+    public void randomizeField(Graphics g){
         objectArray.add(player);
         objectArray.add(endPoint);
+        playField[0][0] = player;
+        playField[9][9] = endPoint;
+        gameObjects[0][0] = true;
+        gameObjects[9][9] = true;
+        
         int keys = 3;
         int walls = 15;
         int barricades = 15;
-        
-        boolean[][] gameObjects = new boolean[10][10];        
-        gameObjects[0][0] = true;
-        gameObjects[9][9] = true;
-        playField[0][0] = player;
-        playField[9][9] = endPoint;
         
         //Add Keys
         for(int  i = 0 ; i< keys ; i++){
@@ -93,17 +92,13 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             objectArray.add(new Barricade("Barricade", x*50+37, y*50+37,passCode, true));
             playField[x][y] = objectArray.get(i+keys+walls+2);
         }
+
+        
+//        for(int i  = 0; i<playField.length; i++){
+//            System.arraycopy(initialField[i], 0, playField[i], 0, playField[i].length);
+//        }
     }
-    
-    //Loads the game with all the Objects
-    public void loadGame(Graphics g){
-        addToList();
-        for(int i = 0; i<objectArray.size(); i++){
-            objectArray.get(i).initializeImages();
-            objectArray.get(i).render(g);
-        }
-    }
-    
+           
     //Paint playField
     public void paintComponent(Graphics g){
         for(int rows = 0; rows<playField.length; rows++){
@@ -116,7 +111,10 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 g.fillRect(31+columnPosition, 31+rowPosition, 48, 48);
             }
         }
-        loadGame(g);
+        for(int i = 0; i<objectArray.size(); i++){
+            objectArray.get(i).initializeImages();
+            objectArray.get(i).render(g);
+        }
     }
     
     public ArrayList<GameObject> getObjects(){
@@ -124,7 +122,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     }
     
     public void actionPerformed(ActionEvent e){
-        
+        repaint();
     }
 
     
@@ -133,19 +131,63 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         int keyCode = e.getKeyCode();
         
         if(keyCode == KeyEvent.VK_UP) {
+            System.out.println("UP");
+            int x = (player.getX()-37)/50;
+            int y = (player.getY()-37)/50;
+            if(y>=1){
+                playField[x][y-1] = playField[x][y];
+                playField[x][y] = null;
+                y-=1;
+            }   
+            System.out.println((x+1) + " " + (y+1));
             player.moveUp();
+            System.out.println(player.getX());
+            System.out.println(player.getY());
         }
+        
         if(keyCode == KeyEvent.VK_DOWN) {
-            System.out.println("done");
-            player.moveDown();
+            System.out.println("DOWN");
+            int x = (player.getX()-37)/50;
+            int y = (player.getY()-37)/50;
+            if(y<=8){
+                playField[x][y+1] = playField[x][y];
+                playField[x][y] = null;
+                y+=1;
+                player.moveDown();
+            }   
+            System.out.println((x+1) + " " + (y+1));
+            System.out.println(player.getX());
+            System.out.println(player.getY());
         }
+
         if(keyCode == KeyEvent.VK_LEFT) {
-            player.moveLeft();
+            System.out.println("LEFT");
+            int x = (player.getX()-37)/50;
+            int y = (player.getY()-37)/50;
+            if(x>=1){
+                playField[x-1][y] = playField[x][y];
+                playField[x][y] = null;
+                x-=1;
+                player.moveLeft();
+            }   
+            System.out.println((x+1) + " " + (y+1));
+            System.out.println(player.getX());
+            System.out.println(player.getY());
         }
         if(keyCode == KeyEvent.VK_RIGHT) {
-            player.moveRight();
+            System.out.println("RIGHT");
+            int x = (player.getX()-37)/50;
+            int y = (player.getY()-37)/50;
+            if(x<=8){
+                playField[x+1][y] = playField[x][y];
+                playField[x][y] = null;
+                x+=1;
+                player.moveRight();
+            }   
+            System.out.println((x+1) + " " + (y+1));
+            System.out.println(player.getX());
+            System.out.println(player.getY());
         }
-        repaint();
     }
       
     @Override

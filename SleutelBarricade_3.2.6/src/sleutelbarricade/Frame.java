@@ -1,6 +1,7 @@
 package sleutelbarricade;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import javax.swing.*;
 
 /**
@@ -8,6 +9,7 @@ import javax.swing.*;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public class Frame extends JFrame {
+    private Graphics g;
     
     public Frame(String title, int width, int height){           
         this.setTitle(title);
@@ -20,6 +22,7 @@ public class Frame extends JFrame {
         //Add playField 2D array of Objects
         SleutelBarricade sleutelBarricade = new SleutelBarricade();
         sleutelBarricade.setPreferredSize(new Dimension(width, height));
+        sleutelBarricade.randomizeField(g);
         this.add(sleutelBarricade);
        
         this.setResizable(true);
@@ -29,6 +32,6 @@ public class Frame extends JFrame {
     }
     
     public static void main(String[] args) {
-        Frame gameFrame = new Frame("SleutelBarricade", 570, 700);
+        Frame gameFrame = new Frame("SleutelBarricade", 570, 700);        
     }
 }
