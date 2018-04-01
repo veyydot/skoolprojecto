@@ -1,6 +1,7 @@
 package sleutelbarricade;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,9 @@ public class Player extends GameObject{
     private final String Player_IMG_PATH = "src/images/Player.jpeg";    
     private BufferedImage Player = null;
     private Graphics g;
+    
+    
+    private SleutelBarricade sb;
     
     public Player(String objectName, int x, int y, boolean isFull) {
         super(objectName, x, y, isFull);
@@ -38,24 +42,29 @@ public class Player extends GameObject{
         imgP = Player.getRGB(0, 0, imgW, imgH, null, 0, imgW);
     }
     
-    public void moveDown(){
-        x = x + 0;
-        y = y + 50;
-    }
-    
-    public void moveUp(){
-        x = x + 0;
-        y = y - 50;
-    }
-    
-    public void moveRight(){
-        x = x + 50;
-        y = y + 0;
-    }
-    
-    public void moveLeft(){
-        x = x - 50;
-        y = y + 0;
+    public void move(KeyEvent e){
+        int keyCode = e.getKeyCode();
+        //if(movePossible() == true){
+            System.out.println("good");
+            switch(keyCode){
+            case KeyEvent.VK_DOWN:
+                x = x + 0;
+                y = y + 50;
+                break;
+            case KeyEvent.VK_UP:
+                x = x + 0;
+                y = y - 50;
+                break;
+            case KeyEvent.VK_RIGHT:
+                x = x + 50;
+                y = y + 0;
+                break;
+            case KeyEvent.VK_LEFT:
+                x = x - 50;
+                y = y + 0;
+                break;
+            }             
+    //}
     }
     
     @Override
@@ -72,6 +81,16 @@ public class Player extends GameObject{
     }
     
     public boolean movePossible(){
+        System.out.println(sb.getGameObjects().length);
+        System.out.println("test");
+
+        for(int i = 0; i < sb.getGameObjects().length; i++){            
+            for(int j = 0; j < sb.getGameObjects()[0].length; j++){
+                if(sb.getGameObjects()[i][j] == false){
+                    return true;
+                }
+            }
+        }                
         return false;
     }
 

@@ -40,6 +40,10 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         setFocusable(true);
     }
     
+    public boolean[][] getGameObjects(){
+        return gameObjects;
+    }
+    
     public void randomizeField(Graphics g){
         objectArray.add(player);
         objectArray.add(endPoint);
@@ -117,10 +121,6 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         }
     }
     
-    public ArrayList<GameObject> getObjects(){
-        return objectArray;
-    }
-    
     public void actionPerformed(ActionEvent e){
         repaint();
     }
@@ -134,15 +134,16 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             System.out.println("UP");
             int x = (player.getX()-37)/50;
             int y = (player.getY()-37)/50;
-            if(y>=1){
+            if(y>=1){                
+                player.move(e);
                 playField[x][y-1] = playField[x][y];
                 playField[x][y] = null;
                 y-=1;
+                
             }   
-            System.out.println((x+1) + " " + (y+1));
-            player.moveUp();
-            System.out.println(player.getX());
-            System.out.println(player.getY());
+            System.out.println("X: " + (x+1) + " " + "Y: " +(y+1));
+            System.out.println("X: " + player.getX());
+            System.out.println("Y: " + player.getY());
         }
         
         if(keyCode == KeyEvent.VK_DOWN) {
@@ -150,10 +151,11 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             int x = (player.getX()-37)/50;
             int y = (player.getY()-37)/50;
             if(y<=8){
+                System.out.println("Correct");
+                player.move(e);
                 playField[x][y+1] = playField[x][y];
                 playField[x][y] = null;
                 y+=1;
-                player.moveDown();
             }   
             System.out.println((x+1) + " " + (y+1));
             System.out.println(player.getX());
@@ -168,12 +170,13 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 playField[x-1][y] = playField[x][y];
                 playField[x][y] = null;
                 x-=1;
-                player.moveLeft();
+                player.move(e);
             }   
             System.out.println((x+1) + " " + (y+1));
             System.out.println(player.getX());
             System.out.println(player.getY());
         }
+        
         if(keyCode == KeyEvent.VK_RIGHT) {
             System.out.println("RIGHT");
             int x = (player.getX()-37)/50;
@@ -182,7 +185,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 playField[x+1][y] = playField[x][y];
                 playField[x][y] = null;
                 x+=1;
-                player.moveRight();
+                player.move(e);
             }   
             System.out.println((x+1) + " " + (y+1));
             System.out.println(player.getX());

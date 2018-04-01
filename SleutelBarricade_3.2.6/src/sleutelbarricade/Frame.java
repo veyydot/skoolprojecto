@@ -25,7 +25,7 @@ public class Frame extends JFrame {
         sleutelBarricade.randomizeField(g);
         this.add(sleutelBarricade);
        
-        this.setResizable(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);          
