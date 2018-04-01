@@ -129,12 +129,14 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        
+        boolean possible;
         if(keyCode == KeyEvent.VK_UP) {
             System.out.println("UP");
             int x = (player.getX()-37)/50;
             int y = (player.getY()-37)/50;
             if(y>=1){                
+                possible = player.movePossible(playField, gameObjects,objectArray, "UP");
+                //hier moet een if statement om de move alleen te doen als hij possible is
                 player.move(e);
                 playField[x][y-1] = playField[x][y];
                 playField[x][y] = null;

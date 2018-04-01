@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
@@ -80,19 +81,65 @@ public class Player extends GameObject{
         return keyValue == barricadeValue;
     }
     
-    public boolean movePossible(){
-        System.out.println(sb.getGameObjects().length);
-        System.out.println("test");
-
-        for(int i = 0; i < sb.getGameObjects().length; i++){            
-            for(int j = 0; j < sb.getGameObjects()[0].length; j++){
-                if(sb.getGameObjects()[i][j] == false){
-                    return true;
+    public boolean movePossible(GameObject[][] playField, boolean[][] board, ArrayList<GameObject> lijst, String direction){
+        boolean possible = false;
+        switch(direction){
+            case "UP":
+                if(board[getX()][getY()-1] == true){
+                    if(playField[getX()][getY()-1].getObjectName().equals("Wall")){
+                        possible = false;
+                    }else if(playField[getX()][getY()-1].getObjectName().equals("Key")){
+                        //hier interactie met key
+                    }else if(playField[getX()][getY()-1].getObjectName().equals("Barricade")){
+                        //hier komt interactie met barricade
+                    }
+                }else{
+                    possible = true;
                 }
-            }
-        }                
-        return false;
-    }
+                break;
+            case "DOWN":
+                if(board[getX()][getY()+1] == true){
+                    if(playField[getX()][getY()+1].getObjectName().equals("Wall")){
+                        possible = false;
+                    }else if(playField[getX()][getY()+1].getObjectName().equals("Key")){
+                        //hier interactie met key
+                    }else if(playField[getX()][getY()+1].getObjectName().equals("Barricade")){
+                        //hier komt interactie met barricade
+                    }
+                }else{
+                    possible = true;
+                }
+                break;
+            case "LEFT":
+                if(board[getX()-1][getY()] == true){
+                    if(playField[getX()-1][getY()].getObjectName().equals("Wall")){
+                        possible = false;
+                    }else if(playField[getX()-1][getY()].getObjectName().equals("Key")){
+                        //hier interactie met key
+                    }else if(playField[getX()-1][getY()].getObjectName().equals("Barricade")){
+                        //hier komt interactie met barricade
+                    }
+                }else{
+                    possible = true;
+                }
+                break;
+            case "RIGHT":
+                if(board[getX()][getY()-1] == true){
+                    if(playField[getX()+1][getY()].getObjectName().equals("Wall")){
+                        possible = false;
+                    }else if(playField[getX()+1][getY()].getObjectName().equals("Key")){
+                        //hier interactie met key
+                    }else if(playField[getX()+1][getY()].getObjectName().equals("Barricade")){
+                        //hier komt interactie met barricade
+                    }
+                }else{
+                    possible = true;
+                }
+                break;
+        }
+        return possible;
+    }   
+    
 
     @Override
     public int getX() {
