@@ -96,11 +96,6 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             objectArray.add(new Barricade("Barricade", x*50+37, y*50+37,passCode, true));
             playField[x][y] = objectArray.get(i+keys+walls+2);
         }
-
-        
-//        for(int i  = 0; i<playField.length; i++){
-//            System.arraycopy(initialField[i], 0, playField[i], 0, playField[i].length);
-//        }
     }
            
     //Paint playField
@@ -129,69 +124,67 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
+        int x = (player.getX()-37)/50;
+        int y = (player.getY()-37)/50;
         boolean possible;
         if(keyCode == KeyEvent.VK_UP) {
             System.out.println("UP");
-            int x = (player.getX()-37)/50;
-            int y = (player.getY()-37)/50;
             if(y>=1){                
-                possible = player.movePossible(playField, gameObjects,objectArray, "UP");
-                //hier moet een if statement om de move alleen te doen als hij possible is
-                player.move(e);
-                playField[x][y-1] = playField[x][y];
-                playField[x][y] = null;
-                y-=1;
-                
+                possible = player.movePossible(playField, gameObjects, "UP");
+                if(possible){
+                    player.move(e);
+                    playField[x][y-1] = playField[x][y];
+                    playField[x][y] = null;
+                    y-=1;
+                }else{
+                    System.out.println("Impossible move!");
+                }
             }   
-            System.out.println("X: " + (x+1) + " " + "Y: " +(y+1));
-            System.out.println("X: " + player.getX());
-            System.out.println("Y: " + player.getY());
         }
         
         if(keyCode == KeyEvent.VK_DOWN) {
             System.out.println("DOWN");
-            int x = (player.getX()-37)/50;
-            int y = (player.getY()-37)/50;
             if(y<=8){
-                System.out.println("Correct");
-                player.move(e);
-                playField[x][y+1] = playField[x][y];
-                playField[x][y] = null;
-                y+=1;
-            }   
-            System.out.println((x+1) + " " + (y+1));
-            System.out.println(player.getX());
-            System.out.println(player.getY());
+                possible = player.movePossible(playField, gameObjects, "DOWN");
+                if(possible){
+                    player.move(e);
+                    playField[x][y+1] = playField[x][y];
+                    playField[x][y] = null;
+                    y+=1;
+                }else{
+                    System.out.println("Impossible move!");
+                }   
+            }
         }
 
         if(keyCode == KeyEvent.VK_LEFT) {
             System.out.println("LEFT");
-            int x = (player.getX()-37)/50;
-            int y = (player.getY()-37)/50;
             if(x>=1){
-                playField[x-1][y] = playField[x][y];
-                playField[x][y] = null;
-                x-=1;
-                player.move(e);
+                possible = player.movePossible(playField, gameObjects, "LEFT");
+                if(possible){
+                    player.move(e);
+                    playField[x-1][y] = playField[x][y];
+                    playField[x][y] = null;
+                    x-=1;
+                }else{
+                    System.out.println("Impossible move!");
+                }
             }   
-            System.out.println((x+1) + " " + (y+1));
-            System.out.println(player.getX());
-            System.out.println(player.getY());
         }
         
         if(keyCode == KeyEvent.VK_RIGHT) {
             System.out.println("RIGHT");
-            int x = (player.getX()-37)/50;
-            int y = (player.getY()-37)/50;
             if(x<=8){
-                playField[x+1][y] = playField[x][y];
-                playField[x][y] = null;
-                x+=1;
-                player.move(e);
-            }   
-            System.out.println((x+1) + " " + (y+1));
-            System.out.println(player.getX());
-            System.out.println(player.getY());
+                possible = player.movePossible(playField, gameObjects, "RIGHT");
+                if(possible){
+                    playField[x+1][y] = playField[x][y];
+                    playField[x][y] = null;
+                    x+=1;
+                    player.move(e);
+                }else{
+                    System.out.println("Impossible move!");
+                }
+            }
         }
     }
       
