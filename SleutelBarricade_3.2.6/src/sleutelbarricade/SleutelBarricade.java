@@ -38,12 +38,27 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         t.start();
         addKeyListener(this);
         setFocusable(true);
+    }    
+    
+    //Convert Array Position to Pixels, !!Unit Testen
+    public int positionToPixel(int pos){
+        int position = pos * 50+37;
+        return position;
     }
     
-    public boolean[][] getGameObjects(){
-        return gameObjects;
+    //Convert X Pixels to Array Position
+    public int pixelToPositionX(int pixels){
+        int xPosition = (pixels - 37) /50;
+        return xPosition;
     }
     
+    //Convert Y Pixels to Array Position
+    public int pixelToPositionY(int pixels){
+        int yPosition = (pixels - 37)/50;
+        return yPosition;
+    }
+    
+    //Randomize All Objects To The ArrayList
     public void randomizeField(Graphics g){
         objectArray.add(player);
         objectArray.add(endPoint);
@@ -56,7 +71,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         int walls = 15;
         int barricades = 15;
         
-        //Add Keys
+        //Add Keys to ArrayList
         for(int  i = 0 ; i< keys ; i++){
             int x = 0 ;
             int y = 0;
@@ -66,11 +81,11 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 y = new Random().nextInt(gameObjects[i].length);
             }
             gameObjects[x][y] = true;
-            objectArray.add(new Key("Key", x*50+37, y*50+37, passCode, true));             
+            objectArray.add(new Key("Key", positionToPixel(x), positionToPixel(y), passCode, true));             
             playField[x][y] = objectArray.get(i+2);
         }
         
-        //Add Walls
+        //Add Walls to ArrayList
         for(int i = 0; i<walls; i++){
             int x = 0;
             int y = 0;
@@ -79,11 +94,11 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 y = ThreadLocalRandom.current().nextInt(0,10);
             }
             gameObjects[x][y] = true;
-            objectArray.add(new Wall("Wall", x*50+37, y*50+37, true));
+            objectArray.add(new Wall("Wall", positionToPixel(x), positionToPixel(y), true));
             playField[x][y] = objectArray.get(i+keys+2);
         }
         
-        //Add Barricades
+        //Add Barricades to ArrayList
         for(int i = 0; i<barricades; i++){
             int x = 0;
             int y = 0;
@@ -93,7 +108,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 y = ThreadLocalRandom.current().nextInt(0,10);
             }
             gameObjects[x][y] = true;
-            objectArray.add(new Barricade("Barricade", x*50+37, y*50+37,passCode, true));
+            objectArray.add(new Barricade("Barricade", positionToPixel(x), positionToPixel(y),passCode, true));
             playField[x][y] = objectArray.get(i+keys+walls+2);
         }
     }
@@ -116,16 +131,13 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         }
     }
     
-    public void actionPerformed(ActionEvent e){
-        repaint();
-    }
-
-    
-    @Override
+    //KeyListener
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        int x = (player.getX()-37)/50;
-        int y = (player.getY()-37)/50;
+        
+        int x = pixelToPositionX(player.getX());
+        int y = pixelToPositionY(player.getY());
+        
         boolean possible;
         if(keyCode == KeyEvent.VK_UP) {
             System.out.println("UP");
@@ -195,26 +207,16 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             }
         }
     }
-      
-    @Override
+    
+    public void actionPerformed(ActionEvent e){
+        repaint();
+    }  
+    
     public void keyReleased(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        if(keyCode == KeyEvent.VK_UP) {
-            
-        }
-        if(keyCode == KeyEvent.VK_DOWN) {
-            
-        }
-        if(keyCode == KeyEvent.VK_LEFT) {
-            
-        }
-        if(keyCode == KeyEvent.VK_RIGHT) {
-            
-        }
+        
     }
-
-    @Override
+    
     public void keyTyped(KeyEvent e) {
-
+        
     }
 }
