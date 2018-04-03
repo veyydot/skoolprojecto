@@ -67,7 +67,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         gameObjects[0][0] = true;
         gameObjects[9][9] = true;
         
-        int keys = 3;
+        int keys = 5;
         int walls = 15;
         int barricades = 15;
         
@@ -125,10 +125,12 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 g.fillRect(31+columnPosition, 31+rowPosition, 48, 48);
             }
         }
-        for(int i = 0; i<objectArray.size(); i++){
+        for(int i = 1; i<objectArray.size(); i++){
             objectArray.get(i).initializeImages();
             objectArray.get(i).render(g);
         }
+        objectArray.get(0).initializeImages();
+        objectArray.get(0).render(g);
     }
     
     //KeyListener
@@ -142,7 +144,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         if(keyCode == KeyEvent.VK_UP) {
             System.out.println("UP");
             if(y>=1){                
-                possible = player.movePossible(playField, gameObjects, "UP");
+                possible = player.movePossible(objectArray, playField, gameObjects, "UP");
                 if(possible){
                     player.move(e);
                     playField[x][y-1] = playField[x][y];
@@ -151,7 +153,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     gameObjects[x][y] = false;
                     y-=1;
                 }else{
-                    System.out.println("Impossible move!");
+                    System.out.println("Player didn't move!");
                 }
             }   
         }
@@ -159,7 +161,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         if(keyCode == KeyEvent.VK_DOWN) {
             System.out.println("DOWN");
             if(y<=8){
-                possible = player.movePossible(playField, gameObjects, "DOWN");
+                possible = player.movePossible(objectArray, playField, gameObjects, "DOWN");
                 if(possible){
                     player.move(e);
                     playField[x][y+1] = playField[x][y];
@@ -168,7 +170,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     gameObjects[x][y] = false;
                     y+=1;
                 }else{
-                    System.out.println("Impossible move!");
+                    System.out.println("Player didn't move!");
                 }   
             }
         }
@@ -176,7 +178,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         if(keyCode == KeyEvent.VK_LEFT) {
             System.out.println("LEFT");
             if(x>=1){
-                possible = player.movePossible(playField, gameObjects, "LEFT");
+                possible = player.movePossible(objectArray, playField, gameObjects, "LEFT");
                 if(possible){
                     player.move(e);
                     playField[x-1][y] = playField[x][y];
@@ -185,7 +187,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     gameObjects[x][y] = false;
                     x-=1;
                 }else{
-                    System.out.println("Impossible move!");
+                    System.out.println("Player didn't move!");
                 }
             }   
         }
@@ -193,7 +195,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         if(keyCode == KeyEvent.VK_RIGHT) {
             System.out.println("RIGHT");
             if(x<=8){
-                possible = player.movePossible(playField, gameObjects, "RIGHT");
+                possible = player.movePossible(objectArray, playField, gameObjects, "RIGHT");
                 if(possible){
                     playField[x+1][y] = playField[x][y];
                     playField[x][y] = null;
@@ -202,7 +204,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     x+=1;
                     player.move(e);
                 }else{
-                    System.out.println("Impossible move!");
+                    System.out.println("Player didn't move!");
                 }
             }
         }
