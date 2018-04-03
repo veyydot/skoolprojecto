@@ -19,7 +19,7 @@ public class Player extends GameObject{
     private final String Player_IMG_PATH = "src/images/Player.jpeg";    
     private BufferedImage Player = null;
     private Graphics g;
-    
+    private boolean possible = false;
     
     private SleutelBarricade sb;
     
@@ -76,7 +76,7 @@ public class Player extends GameObject{
     }
     
     public boolean movePossible(GameObject[][] playField, boolean[][] board, String direction){
-        boolean possible = false;
+        Object[] options = {"Yes", "No"};
         int xPos = (getX()-37)/50;
         int yPos = (getY()-37)/50;
         switch(direction){
@@ -84,16 +84,35 @@ public class Player extends GameObject{
                 if(board[xPos][yPos-1] == true){
             switch (playField[xPos][yPos-1].getObjectName()) {
                 case "Wall":
-                    System.out.println("wall");
-                    possible = false;
+                    wallInteraction();
                     break;
                 case "Key":
-                    System.out.println(playField[xPos][yPos-1].getPassCode());
-                    possible = true;
+//                    System.out.println(playField[xPos][yPos-1].getPassCode());
+                    int n = JOptionPane.showOptionDialog(null, "Would you like to pick up the key with code: " + playField[xPos][yPos-1].getPassCode(),
+                            "Key pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, options, "No"); 
+                    System.out.println(n);
+                    if(n == 0){
+                        setInventory(playField[xPos][yPos-1].getPassCode());
+                        System.out.println(getInventory());
+                        playField[xPos][yPos-1] = null;
+                        possible = true;
+                    }else{
+                        possible = false;
+                    }
                     break;
                 case "Barricade":
                     System.out.println(playField[xPos][yPos-1].getPassCode());
-                    possible = false;
+                    int j = JOptionPane.showOptionDialog(null, "Would you like to open the barricade with code: " + playField[xPos][yPos-1].getPassCode(),
+                            "Barricade pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, options, "No"); 
+                    System.out.println(j);
+                    if(j == 0 && inventory == playField[xPos][yPos-1].getPassCode()){
+                        playField[xPos][yPos-1] = null;
+                        possible = true;
+                    }else{
+                        possible = false;
+                    }
                     break;
             }
                 }else{
@@ -104,16 +123,35 @@ public class Player extends GameObject{
                 if(board[xPos][yPos+1] == true){
             switch (playField[xPos][yPos+1].getObjectName()) {
                 case "Wall":
-                    System.out.println("wall");
-                    possible = false;
+                    wallInteraction();
                     break;
                 case "Key":
-                    System.out.println(playField[xPos][yPos+1].getPassCode());
-                    possible = true;
+//                    System.out.println(playField[xPos][yPos+1].getPassCode());
+                    int n = JOptionPane.showOptionDialog(null, "Would you like to pick up the key with code: " + playField[xPos][yPos+1].getPassCode(),
+                            "Key pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, options, "No"); 
+                    System.out.println(n);
+                    if(n == 0){
+                        setInventory(playField[xPos][yPos+1].getPassCode());
+                        System.out.println(getInventory());
+                        playField[xPos][yPos+1] = null;
+                        possible = true;
+                    }else{
+                        possible = false;
+                    }                    
                     break;
                 case "Barricade":
                     System.out.println(playField[xPos][yPos+1].getPassCode());
-                    possible = false;
+                    int k = JOptionPane.showOptionDialog(null, "Would you like to open the barricade with code: " + playField[xPos][yPos+1].getPassCode(),
+                            "Barricade pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, options, "No"); 
+                    System.out.println(k);
+                    if(k == 0 && inventory == playField[xPos][yPos+1].getPassCode()){
+                        playField[xPos][yPos+1] = null;
+                        possible = true;
+                    }else{
+                        possible = false;
+                    }
                     break;
             }
                 }else{
@@ -124,16 +162,35 @@ public class Player extends GameObject{
                 if(board[xPos-1][yPos] == true){
             switch (playField[xPos-1][yPos].getObjectName()) {
                 case "Wall":
-                    System.out.println("wall");
-                    possible = false;
+                    wallInteraction();
                     break;
                 case "Key":
-                    System.out.println(playField[xPos-1][yPos].getPassCode());
-                    possible = true;
+//                    System.out.println(playField[xPos-1][yPos].getPassCode());
+                    int n = JOptionPane.showOptionDialog(null, "Would you like to pick up the key with code: " + playField[xPos-1][yPos].getPassCode(),
+                            "Key pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, options, "No"); 
+                    System.out.println(n);
+                    if(n == 0){
+                        setInventory(playField[xPos-1][yPos].getPassCode());
+                        System.out.println(getInventory());
+                        playField[xPos-1][yPos] = null;
+                        possible = true;
+                    }else{
+                        possible = false;
+                    }
                     break;
                 case "Barricade":
                     System.out.println(playField[xPos-1][yPos].getPassCode());
-                    possible = false;
+                    int j = JOptionPane.showOptionDialog(null, "Would you like to open the barricade with code: " + playField[xPos-1][yPos].getPassCode(),
+                            "Barricade pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, options, "No"); 
+                    System.out.println(j);
+                    if(j == 0 && inventory == playField[xPos-1][yPos].getPassCode()){
+                        playField[xPos][yPos+1] = null;
+                        possible = true;
+                    }else{
+                        possible = false;
+                    }                   
                     break;
             }
                 }else{
@@ -142,18 +199,36 @@ public class Player extends GameObject{
                 break;
             case "RIGHT":
                 if(board[xPos+1][yPos] == true){
-            switch (playField[xPos][yPos].getObjectName()) {
+            switch (playField[xPos+1][yPos].getObjectName()) {
                 case "Wall":
-                    System.out.println("wall");
-                    possible = false;
+                    wallInteraction();
                     break;
                 case "Key":
                     System.out.println(playField[xPos+1][yPos].getPassCode());
-                    possible = true;
+                    int n = JOptionPane.showOptionDialog(null, "Would you like to pick up the key with code: " + playField[xPos+1][yPos].getPassCode(),
+                            "Key pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, options, "No"); 
+                    System.out.println(n);
+                    if(n == 0){
+                        setInventory(playField[xPos+1][yPos].getPassCode());
+                        playField[xPos+1][yPos] = null;
+                        possible = true;
+                    }else{
+                        possible = false;
+                    }
                     break;
                 case "Barricade":
                     System.out.println(playField[xPos+1][yPos].getPassCode());
-                    possible = false;
+                    int j = JOptionPane.showOptionDialog(null, "Would you like to open the barricade with code: " + playField[xPos+1][yPos].getPassCode(),
+                            "Barricade pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                            null, options, "No"); 
+                    System.out.println(j);
+                    if(j == 0 && getInventory() == playField[xPos+1][yPos].getPassCode()){
+                        playField[xPos+1][yPos] = null;
+                        possible = true;
+                    }else{
+                        possible = false;
+                    }                    
                     break;
             }
                 }else{
@@ -164,7 +239,12 @@ public class Player extends GameObject{
         return possible;
     }   
     
-
+    public boolean wallInteraction(){
+        System.out.println("Wall");
+        possible = false;
+        return possible;
+    }
+    
     @Override
     public int getX() {
         return x;
