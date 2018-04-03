@@ -135,6 +135,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     player.move(e);
                     playField[x][y-1] = playField[x][y];
                     playField[x][y] = null;
+                    gameObjects[x][y-1] = true;
+                    gameObjects[x][y] = false;
                     y-=1;
                 }else{
                     System.out.println("Impossible move!");
@@ -150,6 +152,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     player.move(e);
                     playField[x][y+1] = playField[x][y];
                     playField[x][y] = null;
+                    gameObjects[x][y+1] = true;
+                    gameObjects[x][y] = false;
                     y+=1;
                 }else{
                     System.out.println("Impossible move!");
@@ -165,6 +169,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     player.move(e);
                     playField[x-1][y] = playField[x][y];
                     playField[x][y] = null;
+                    gameObjects[x-1][y] = true;
+                    gameObjects[x][y] = false;
                     x-=1;
                 }else{
                     System.out.println("Impossible move!");
@@ -179,6 +185,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 if(possible){
                     playField[x+1][y] = playField[x][y];
                     playField[x][y] = null;
+                    gameObjects[x+1][y] = true;
+                    gameObjects[x][y] = false;
                     x+=1;
                     player.move(e);
                 }else{

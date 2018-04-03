@@ -82,17 +82,17 @@ public class Player extends GameObject{
         switch(direction){
             case "UP":
                 if(board[xPos][yPos-1] == true){
-            switch (playField[xPos][yPos].getObjectName()) {
+            switch (playField[xPos][yPos-1].getObjectName()) {
                 case "Wall":
                     System.out.println("wall");
                     possible = false;
                     break;
                 case "Key":
-                    System.out.println("key");
+                    System.out.println(playField[xPos][yPos-1].getPassCode());
                     possible = true;
                     break;
                 case "Barricade":
-                    System.out.println(playField[xPos][yPos].getPassCode());
+                    System.out.println(playField[xPos][yPos-1].getPassCode());
                     possible = false;
                     break;
             }
@@ -102,17 +102,17 @@ public class Player extends GameObject{
                 break;
             case "DOWN":
                 if(board[xPos][yPos+1] == true){
-            switch (playField[xPos][yPos].getObjectName()) {
+            switch (playField[xPos][yPos+1].getObjectName()) {
                 case "Wall":
                     System.out.println("wall");
                     possible = false;
                     break;
                 case "Key":
-                    System.out.println("key");
+                    System.out.println(playField[xPos][yPos+1].getPassCode());
                     possible = true;
                     break;
                 case "Barricade":
-                    System.out.println(playField[xPos][yPos].getPassCode());
+                    System.out.println(playField[xPos][yPos+1].getPassCode());
                     possible = false;
                     break;
             }
@@ -122,17 +122,17 @@ public class Player extends GameObject{
                 break;
             case "LEFT":
                 if(board[xPos-1][yPos] == true){
-            switch (playField[xPos][yPos].getObjectName()) {
+            switch (playField[xPos-1][yPos].getObjectName()) {
                 case "Wall":
                     System.out.println("wall");
                     possible = false;
                     break;
                 case "Key":
-                    System.out.println("key");
+                    System.out.println(playField[xPos-1][yPos].getPassCode());
                     possible = true;
                     break;
                 case "Barricade":
-                    System.out.println(playField[xPos][yPos].getPassCode());
+                    System.out.println(playField[xPos-1][yPos].getPassCode());
                     possible = false;
                     break;
             }
@@ -148,11 +148,11 @@ public class Player extends GameObject{
                     possible = false;
                     break;
                 case "Key":
-                    System.out.println("key");
+                    System.out.println(playField[xPos+1][yPos].getPassCode());
                     possible = true;
                     break;
                 case "Barricade":
-                    System.out.println(playField[xPos][yPos].getPassCode());
+                    System.out.println(playField[xPos+1][yPos].getPassCode());
                     possible = false;
                     break;
             }
