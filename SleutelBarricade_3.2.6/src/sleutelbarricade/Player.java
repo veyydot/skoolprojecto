@@ -14,14 +14,25 @@ import javax.swing.JOptionPane;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public class Player extends GameObject {
+<<<<<<< HEAD
     private Object[] options = {"Yes", "No"};
+=======
+    private final Object[] options = {"Yes", "No"};
+    private int x, y;
+>>>>>>> 2edf9d84d989a784a718548073181e1c480b91f4
     private int inventory;
     private final String Player_IMG_PATH = "src/images/Player.jpeg";
     private BufferedImage Player = null;
     private boolean possible = false;
+<<<<<<< HEAD
     
     public Player(String objectName, int x, int y) {
         super(objectName, x, y);
+=======
+       
+    public Player(String objectName, int x, int y, boolean isFull) {
+        super(objectName, x, y, isFull);
+>>>>>>> 2edf9d84d989a784a718548073181e1c480b91f4
         this.inventory = 0;
     }
     
@@ -60,15 +71,7 @@ public class Player extends GameObject {
     public void render(Graphics g) {
         g.drawImage(Player, x, y, null);
     }
-    
-    public void pickUpKey(int value) {
-        
-    }
-    
-    public boolean unlockBarricade(int keyValue, int barricadeValue) {
-        return keyValue == barricadeValue;
-    }
-    
+          
     public boolean movePossible(ArrayList<GameObject> objectArray, GameObject[][] playField, boolean[][] board, String direction) {
     int xPos = (getX() - 37) / 50;
     int yPos = (getY() - 37) / 50;
@@ -80,10 +83,10 @@ public class Player extends GameObject {
                         wallInteraction();
                         break;
                     case "Key":
-                        keyInteraction(playField[xPos][yPos-1], objectArray);
+                        pickUpKey(playField[xPos][yPos-1], objectArray);
                         break;
                     case "Barricade":
-                        barricadeInteraction(playField[xPos][yPos-1], objectArray);
+                        unlockBarricade(playField[xPos][yPos-1], objectArray);
                         break;
                 }
             }else{
@@ -97,10 +100,10 @@ public class Player extends GameObject {
                         wallInteraction();
                         break;
                     case "Key":
-                        keyInteraction(playField[xPos][yPos+1], objectArray);
+                        pickUpKey(playField[xPos][yPos+1], objectArray);
                         break;  
                     case "Barricade":
-                        barricadeInteraction(playField[xPos][yPos+1], objectArray);
+                        unlockBarricade(playField[xPos][yPos+1], objectArray);
                         break;
                     case "EndPoint":
                         JOptionPane.showMessageDialog(null, "Endpoint reached!");
@@ -117,10 +120,10 @@ public class Player extends GameObject {
                         wallInteraction();
                         break;
                     case "Key":
-                        keyInteraction(playField[xPos-1][yPos],objectArray);
+                        pickUpKey(playField[xPos-1][yPos],objectArray);
                         break;
                     case "Barricade":
-                        barricadeInteraction(playField[xPos-1][yPos], objectArray);
+                        unlockBarricade(playField[xPos-1][yPos], objectArray);
                         break;
                     case "EndPoint":
                         JOptionPane.showMessageDialog(null, "Endpoint reached!");
@@ -137,10 +140,10 @@ public class Player extends GameObject {
                         wallInteraction();
                         break;
                     case "Key":
-                        keyInteraction(playField[xPos+1][yPos], objectArray);
+                        pickUpKey(playField[xPos+1][yPos], objectArray);
                         break;
                     case "Barricade":
-                        barricadeInteraction(playField[xPos+1][yPos], objectArray);
+                        unlockBarricade(playField[xPos+1][yPos], objectArray);
                         break;
                     case "EndPoint":
                         JOptionPane.showMessageDialog(null, "Endpoint reached!");
@@ -160,7 +163,7 @@ public class Player extends GameObject {
         return possible;
     }
     
-    public boolean barricadeInteraction(GameObject objectPos, ArrayList<GameObject> objectArray){
+    public boolean unlockBarricade(GameObject objectPos, ArrayList<GameObject> objectArray){
         System.out.println(objectPos.getPassCode());
         int j = JOptionPane.showOptionDialog(null, "Would you like to open the barricade with code: " + objectPos.getPassCode(),
         "Barricade pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
@@ -179,7 +182,7 @@ public class Player extends GameObject {
         return possible;
     }
     
-    public boolean keyInteraction(GameObject objectPos, ArrayList<GameObject> objectArray){
+    public boolean pickUpKey(GameObject objectPos, ArrayList<GameObject> objectArray){
         int n = JOptionPane.showOptionDialog(null, "Would you like to pick up the key with code: " + objectPos.getPassCode(),
         "Key pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
         null, options, "No");
