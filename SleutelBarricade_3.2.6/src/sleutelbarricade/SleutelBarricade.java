@@ -27,7 +27,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private boolean gameState;    
     private ArrayList<GameObject> objectArray = new ArrayList<>();
     private GameObject[][] playField = new GameObject[10][10];
-    boolean[][] gameObjects = new boolean[10][10];
+    private boolean[][] gameObjects = new boolean[10][10];
     private Graphics g;    
     private Player player = new Player("Player", 37, 37, true);
     private EndPoint endPoint = new EndPoint("EndPoint", 487, 487, true);
@@ -56,6 +56,12 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     public int pixelToPositionY(int pixels){
         int yPosition = (pixels - 37)/50;
         return yPosition;
+    }
+    
+    public void resetLevel(Graphics g, GameObject[][] reset){
+        playField[0][0] = player;
+        playField[9][9] = endPoint;
+        
     }
     
     //Randomize All Objects To The ArrayList
@@ -111,6 +117,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             objectArray.add(new Barricade("Barricade", positionToPixel(x), positionToPixel(y),passCode, true));
             playField[x][y] = objectArray.get(i+keys+walls+2);
         }
+        initialField = playField;
     }
            
     //Paint playField

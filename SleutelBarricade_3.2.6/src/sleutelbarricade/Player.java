@@ -41,7 +41,6 @@ public class Player extends GameObject {
     
     public void move(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        //if(movePossible() == true){
         switch (keyCode) {
             case KeyEvent.VK_DOWN:
                 x += 0;
@@ -60,7 +59,6 @@ public class Player extends GameObject {
                 y += 0;
                 break;
         }
-        //}
     }
     
     @Override
