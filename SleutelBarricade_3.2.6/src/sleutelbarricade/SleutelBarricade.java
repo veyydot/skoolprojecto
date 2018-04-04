@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JComponent;
@@ -29,8 +30,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private GameObject[][] playField = new GameObject[10][10];
     private boolean[][] gameObjects = new boolean[10][10];
     private Graphics g;    
-    private Player player = new Player("Player", 37, 37, true);
-    private EndPoint endPoint = new EndPoint("EndPoint", 487, 487, true);
+    private Player player = new Player("Player", 37, 37);
+    private EndPoint endPoint = new EndPoint("EndPoint", 487, 487);
     private final Timer t;
 
     public SleutelBarricade(){
@@ -58,14 +59,13 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         return yPosition;
     }
     
-    public void resetLevel(Graphics g, GameObject[][] reset){
-        playField[0][0] = player;
-        playField[9][9] = endPoint;
-        
+    public void resetLevel(){
+        gameObjects = new boolean[10][10];
+        System.out.println("worked");
     }
     
     //Randomize All Objects To The ArrayList
-    public void randomizeField(Graphics g){
+    public void randomizeField(){
         objectArray.add(player);
         objectArray.add(endPoint);
         playField[0][0] = player;
@@ -76,7 +76,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         int keys = 5;
         int walls = 15;
         int barricades = 15;
-        
+  
         //Add Keys to ArrayList
         for(int  i = 0 ; i< keys ; i++){
             int x = 0 ;
@@ -87,7 +87,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 y = new Random().nextInt(gameObjects[i].length);
             }
             gameObjects[x][y] = true;
-            objectArray.add(new Key("Key", positionToPixel(x), positionToPixel(y), passCode, true));             
+            objectArray.add(new Key("Key", positionToPixel(x), positionToPixel(y), passCode));             
             playField[x][y] = objectArray.get(i+2);
         }
         
@@ -100,7 +100,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 y = ThreadLocalRandom.current().nextInt(0,10);
             }
             gameObjects[x][y] = true;
-            objectArray.add(new Wall("Wall", positionToPixel(x), positionToPixel(y), true));
+            objectArray.add(new Wall("Wall", positionToPixel(x), positionToPixel(y)));
             playField[x][y] = objectArray.get(i+keys+2);
         }
         
@@ -114,10 +114,10 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 y = ThreadLocalRandom.current().nextInt(0,10);
             }
             gameObjects[x][y] = true;
-            objectArray.add(new Barricade("Barricade", positionToPixel(x), positionToPixel(y),passCode, true));
+            objectArray.add(new Barricade("Barricade", positionToPixel(x), positionToPixel(y),passCode));
             playField[x][y] = objectArray.get(i+keys+walls+2);
         }
-        initialField = playField;
+        initialField = playField.clone();
     }
            
     //Paint playField

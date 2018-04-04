@@ -15,15 +15,14 @@ public class Key extends GameObject{
     private final String Key_IMG_PATH = "src/images/Key.jpeg";    
     private BufferedImage Key = null;
     
-    public Key(String objectName, int x, int y, int passCode, boolean isFull) {
-        super(objectName, x, y, passCode, isFull);
+    public Key(String objectName, int x, int y, int passCode) {
+        super(objectName, x, y, passCode);
     }
     
     @Override
     public void initializeImages(){
         try{
             Key = ImageIO.read(new File(Key_IMG_PATH));
-                 
         }catch(IOException exc){
             exc.printStackTrace();
         }

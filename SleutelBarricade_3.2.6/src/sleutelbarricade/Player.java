@@ -15,17 +15,13 @@ import javax.swing.JOptionPane;
  */
 public class Player extends GameObject {
     private Object[] options = {"Yes", "No"};
-    private int x, y;
     private int inventory;
     private final String Player_IMG_PATH = "src/images/Player.jpeg";
     private BufferedImage Player = null;
-    private Graphics g;
     private boolean possible = false;
     
-    private SleutelBarricade sb;
-    
-    public Player(String objectName, int x, int y, boolean isFull) {
-        super(objectName, x, y, isFull);
+    public Player(String objectName, int x, int y) {
+        super(objectName, x, y);
         this.inventory = 0;
     }
     
@@ -33,7 +29,6 @@ public class Player extends GameObject {
     public void initializeImages() {
         try {
             Player = ImageIO.read(new File(Player_IMG_PATH));
-            
         } catch (IOException exc) {
             exc.printStackTrace();
         }

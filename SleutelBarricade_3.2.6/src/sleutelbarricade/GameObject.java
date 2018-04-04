@@ -11,21 +11,18 @@ public abstract class GameObject {
     protected int x;
     protected int y;
     protected int passCode;
-    protected boolean isFull = false;
     
-    public GameObject(String objectName, int x, int y, boolean isFull){
+    public GameObject(String objectName, int x, int y){
         setObjectName(objectName);
         setX(x);
         setY(y);
-        isFull = true;
     }
     
-    public GameObject(String objectName, int x, int y, int passCode, boolean isFull){
+    public GameObject(String objectName, int x, int y, int passCode){
         setObjectName(objectName);
         setX(x);
         setY(y);
         setPassCode(passCode);
-        isFull = true;
     }
     
     public abstract void initializeImages();

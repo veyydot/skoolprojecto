@@ -42,7 +42,7 @@ public class SleutelBarricadeTest {
     @Test
     public void testSomeMethod() {
         // TODO review the generated test code and remove the default call to fail.
-        player = new Player("Player", 37, 37, true);
+        player = new Player("Player", 37, 37);
         gameObjects = new boolean[10][10];
         
         int x = (player.getX()-37)/50;

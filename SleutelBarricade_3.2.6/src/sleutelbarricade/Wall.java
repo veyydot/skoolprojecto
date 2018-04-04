@@ -15,15 +15,14 @@ public class Wall extends GameObject{
     private final String Wall_IMG_PATH = "src/images/Muur.jpeg";    
     private BufferedImage Wall = null;
     
-    public Wall(String objectName, int x, int y, boolean isFull) {
-        super(objectName, x, y, isFull);
+    public Wall(String objectName, int x, int y) {
+        super(objectName, x, y);
     }
     
     @Override
     public void initializeImages(){
         try{
             Wall = ImageIO.read(new File(Wall_IMG_PATH));
-                 
         }catch(IOException exc){
             exc.printStackTrace();
         }

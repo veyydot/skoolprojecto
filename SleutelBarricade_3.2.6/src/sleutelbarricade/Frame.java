@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
  */
 public class Frame extends JFrame {
     private Graphics g;
+    private SleutelBarricade sleutelBarricade = new SleutelBarricade();
     private final String invIcon_IMG_PATH = "src/images/Key.jpeg";
     
     public Frame(String title, int width, int height){           
@@ -39,7 +40,7 @@ public class Frame extends JFrame {
         randomize.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                System.out.println("test");
+                sleutelBarricade.randomizeField();
             }
         });
         
@@ -51,14 +52,14 @@ public class Frame extends JFrame {
         reset.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                sleutelBarricade.resetLevel();
             }
         });
         
         //Add playField 2D array of Objects
-        SleutelBarricade sleutelBarricade = new SleutelBarricade();
+        //SleutelBarricade sleutelBarricade = new SleutelBarricade();
         sleutelBarricade.setPreferredSize(new Dimension(width, height));
-        sleutelBarricade.randomizeField(g);
+        sleutelBarricade.randomizeField();
         this.add(sleutelBarricade);
        
         this.setResizable(false);
