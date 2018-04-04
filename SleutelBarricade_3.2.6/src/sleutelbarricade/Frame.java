@@ -3,6 +3,7 @@ package sleutelbarricade;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -10,7 +11,7 @@ import javax.swing.*;
  */
 public class Frame extends JFrame {
     private Graphics g;
-    
+    private final String invIcon_IMG_PATH = "src/images/Key.jpeg";
     public Frame(String title, int width, int height){           
         this.setTitle(title);
         
@@ -19,6 +20,18 @@ public class Frame extends JFrame {
         this.setMinimumSize(new Dimension(width, height));
         this.setMaximumSize(new Dimension(width, height));
         
+        
+        //Add control buttons and other graphics to the field
+        ImageIcon invIcon = new ImageIcon(invIcon_IMG_PATH);
+        JLabel inventory = new JLabel(invIcon);
+        inventory.setText("0");
+        inventory.setBounds(600,31,200,100);
+        inventory.setBorder(new TitledBorder("Inventory"));
+        this.add(inventory);
+        JButton randomize = new JButton("Randomize level");
+        randomize.setBounds(600,181,200,40);
+        randomize.setEnabled(true);
+        this.add(randomize);
         //Add playField 2D array of Objects
         SleutelBarricade sleutelBarricade = new SleutelBarricade();
         sleutelBarricade.setPreferredSize(new Dimension(width, height));
@@ -32,6 +45,6 @@ public class Frame extends JFrame {
     }
     
     public static void main(String[] args) {
-        Frame gameFrame = new Frame("SleutelBarricade", 570, 700);        
+        Frame gameFrame = new Frame("SleutelBarricade", 900, 700);        
     }
 }
