@@ -45,7 +45,7 @@ public class Frame extends JFrame {
         
         //Add Reset Button
         JButton reset = new JButton("Reset Level");
-        reset.setBounds(600, 220, 200, 40);
+        reset.setBounds(600, 231, 200, 40);
         reset.setEnabled(true);
         this.add(reset);
         reset.addActionListener(new ActionListener(){
