@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.JComponent;
@@ -30,13 +29,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private final GameObject[][] playField = new GameObject[10][10];
     private final boolean[][] gameObjects = new boolean[10][10];
     private Graphics g;    
-<<<<<<< HEAD
     private Player player = new Player("Player", 37, 37);
     private EndPoint endPoint = new EndPoint("EndPoint", 487, 487);
-=======
-    private final Player player = new Player("Player", 37, 37, true);
-    private final EndPoint endPoint = new EndPoint("EndPoint", 487, 487, true);
->>>>>>> 2edf9d84d989a784a718548073181e1c480b91f4
     private final Timer t;
 
     public SleutelBarricade(){
@@ -65,7 +59,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     }
     
     public void resetLevel(){
-        gameObjects = new boolean[10][10];
+        
         System.out.println("worked");
     }
     
@@ -78,13 +72,6 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         gameObjects[0][0] = true;
         gameObjects[9][9] = true;
         
-<<<<<<< HEAD
-        int keys = 5;
-        int walls = 15;
-        int barricades = 15;
-  
-=======
->>>>>>> 2edf9d84d989a784a718548073181e1c480b91f4
         //Add Keys to ArrayList
         for(int  i = 0 ; i< keys ; i++){
             int x = 0 ;

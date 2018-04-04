@@ -14,25 +14,14 @@ import javax.swing.JOptionPane;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public class Player extends GameObject {
-<<<<<<< HEAD
     private Object[] options = {"Yes", "No"};
-=======
-    private final Object[] options = {"Yes", "No"};
-    private int x, y;
->>>>>>> 2edf9d84d989a784a718548073181e1c480b91f4
     private int inventory;
     private final String Player_IMG_PATH = "src/images/Player.jpeg";
     private BufferedImage Player = null;
     private boolean possible = false;
-<<<<<<< HEAD
-    
+       
     public Player(String objectName, int x, int y) {
         super(objectName, x, y);
-=======
-       
-    public Player(String objectName, int x, int y, boolean isFull) {
-        super(objectName, x, y, isFull);
->>>>>>> 2edf9d84d989a784a718548073181e1c480b91f4
         this.inventory = 0;
     }
     
