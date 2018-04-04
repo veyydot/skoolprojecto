@@ -22,16 +22,16 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private final int walls = 15;
     private final int barricades = 15;
     private final int keys = 5;  
-    private GameObject[][] initialField;
+    private ArrayList<GameObject> initialArray;
     
 //    private boolean gameState;    
-    private final ArrayList<GameObject> objectArray = new ArrayList<>();
-    private final GameObject[][] playField = new GameObject[10][10];
-    private final boolean[][] gameObjects = new boolean[10][10];
+    private ArrayList<GameObject> objectArray = new ArrayList<>();
+    private GameObject[][] playField = new GameObject[10][10];
+    private boolean[][] gameObjects = new boolean[10][10];
     private Graphics g;    
     private Player player = new Player("Player", 37, 37);
     private EndPoint endPoint = new EndPoint("EndPoint", 487, 487);
-    private final Timer t;
+    private Timer t;
 
     public SleutelBarricade(){
         this.t = new Timer(5, this);
@@ -59,7 +59,12 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     }
     
     public void resetLevel(){
+        objectArray.clear();
         
+        for(int i = 0; i<initialArray.size(); i++){  
+            initialArray.get(i).initializeImages();
+            initialArray.get(i).render(g);
+        }
         System.out.println("worked");
     }
     
@@ -112,7 +117,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             objectArray.add(new Barricade("Barricade", positionToPixel(x), positionToPixel(y),passCode));
             playField[x][y] = objectArray.get(i+keys+walls+2);
         }
-        initialField = playField.clone();
+        initialArray = new ArrayList<>(objectArray);
     }
            
     //Paint playField
