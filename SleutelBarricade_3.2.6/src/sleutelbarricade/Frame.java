@@ -41,6 +41,7 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e){
                 sleutelBarricade.randomizeField();
+                randomize.setFocusable(false);
             }
         });
         
@@ -53,6 +54,7 @@ public class Frame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sleutelBarricade.resetLevel();
+                randomize.setFocusable(false);
             }
         });
         
@@ -65,7 +67,6 @@ public class Frame extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.requestFocusInWindow();
     }
     
     public static void main(String[] args) {

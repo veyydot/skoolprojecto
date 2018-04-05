@@ -19,9 +19,9 @@ import javax.swing.Timer;
 public class SleutelBarricade extends JComponent implements KeyListener, ActionListener{
      
 //    private String difficulty;
-    private final int walls = 15;
-    private final int barricades = 15;
-    private final int keys = 5;  
+    private final int walls = 18;
+    private final int barricades = 13;
+    private final int keys = 6;  
     private ArrayList<GameObject> initialArray;
     
 //    private boolean gameState;    
@@ -91,7 +91,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         for(int  i = 0 ; i< keys ; i++){
             int x = 0 ;
             int y = 0;
-            int passCode = ThreadLocalRandom.current().nextInt(1,3)*100;
+            int passCode = ThreadLocalRandom.current().nextInt(1,4)*100;
             while(gameObjects[x][y]){
                 x = new Random().nextInt(gameObjects.length);
                 y = new Random().nextInt(gameObjects[i].length);
@@ -118,7 +118,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         for(int i = 0; i<barricades; i++){
             int x = 0;
             int y = 0;
-            int passCode = ThreadLocalRandom.current().nextInt(1,3)*100;
+            int passCode = ThreadLocalRandom.current().nextInt(1,4)*100;
             while(gameObjects[x][y]){
                 x = ThreadLocalRandom.current().nextInt(0,10);
                 y = ThreadLocalRandom.current().nextInt(0,10);
