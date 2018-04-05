@@ -57,7 +57,6 @@ public class Frame extends JFrame {
         });
         
         //Add playField 2D array of Objects
-        //SleutelBarricade sleutelBarricade = new SleutelBarricade();
         sleutelBarricade.setPreferredSize(new Dimension(width, height));
         sleutelBarricade.randomizeField();
         this.add(sleutelBarricade);
@@ -65,7 +64,8 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);          
+        this.setVisible(true);
+        this.requestFocusInWindow();
     }
     
     public static void main(String[] args) {

@@ -70,8 +70,18 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     
     //Randomize All Objects To The ArrayList
     public void randomizeField(){
+        objectArray.clear();
+        for(int i = 0; i<playField.length; i++){
+            for(int j = 0; j<playField[i].length; j++){
+                playField[i][j] = null;
+                gameObjects[i][j] = false;
+            }
+        }
+        
         objectArray.add(player);
         objectArray.add(endPoint);
+        player.setX(positionToPixel(0));
+        player.setY(positionToPixel(0));
         playField[0][0] = player;
         playField[9][9] = endPoint;
         gameObjects[0][0] = true;
