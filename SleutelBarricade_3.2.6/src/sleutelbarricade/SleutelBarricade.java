@@ -250,4 +250,8 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     public void keyTyped(KeyEvent e) {
         
     }
+    
+    public int getPlayerInv(){
+        return player.getInventory();
+    }
 }

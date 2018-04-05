@@ -1,10 +1,6 @@
 package sleutelbarricade;
 
 import java.util.ArrayList;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -33,10 +29,10 @@ public class SleutelBarricadeTest {
     }
     
     @Test
-    public void movePossible(){
+    public void moveToFilledLocation(){
         GameObject[][] playField = new GameObject[10][10];
         boolean[][] filledSpots = new boolean[10][10];
-        Player p = new Player("Player", 37, 37);
+        Player p = new Player("Player", 37, 37, sb);
         playField[0][0] = p;
         filledSpots[0][0] = true;
         
@@ -52,4 +48,23 @@ public class SleutelBarricadeTest {
         assertEquals(expected, result);
     }
     
+    @Test
+    public void moveToEmptyLocation(){
+                GameObject[][] playField = new GameObject[10][10];
+        boolean[][] filledSpots = new boolean[10][10];
+        Player p = new Player("Player", 37, 37, sb);
+        playField[0][0] = p;
+        filledSpots[0][0] = true;
+        
+        Wall w = new Wall("Wall", 37, 87);
+        playField[1][0] = w;
+        filledSpots[1][0] = true;
+        
+        lijst.add(p);
+        lijst.add(w);
+        
+        boolean expected = true;
+        boolean result = p.movePossible(lijst, playField, filledSpots, "DOWN");
+        assertEquals(expected, result);
+    }
 }

@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public class Player extends GameObject {
-    private Object[] options = {"Yes", "No"};
+    private final Object[] options = {"Yes", "No"};
     private int inventory;
     private final String Player_IMG_PATH = "src/images/Player.jpeg";
     private BufferedImage Player = null;
     private boolean possible = false;
-    private SleutelBarricade sleutelBarricade;
+    private final SleutelBarricade sleutelBarricade;
        
     public Player(String objectName, int x, int y,SleutelBarricade sleutelBarricade){
         super(objectName, x, y);

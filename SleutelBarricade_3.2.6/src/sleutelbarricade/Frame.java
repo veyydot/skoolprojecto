@@ -13,9 +13,9 @@ import javax.swing.border.TitledBorder;
  */
 public class Frame extends JFrame {
     private Graphics g;
-    private SleutelBarricade sleutelBarricade = new SleutelBarricade();
+    private static SleutelBarricade sleutelBarricade = new SleutelBarricade();
     private final String invIcon_IMG_PATH = "src/images/Key.jpeg";
-    
+    private static JLabel inventory;
     public Frame(String title, int width, int height){           
         this.setTitle(title);
         
@@ -26,8 +26,8 @@ public class Frame extends JFrame {
         
         //Add control buttons and other graphics to the field
         ImageIcon invIcon = new ImageIcon(invIcon_IMG_PATH);
-        JLabel inventory = new JLabel(invIcon);
-        inventory.setText("0");
+        inventory = new JLabel(invIcon, sleutelBarricade.getPlayerInv());
+        inventory.setText(Integer.toString(sleutelBarricade.getPlayerInv()));
         inventory.setBounds(600,31,200,100);
         inventory.setBorder(new TitledBorder("Inventory"));
         this.add(inventory);
@@ -57,6 +57,9 @@ public class Frame extends JFrame {
     }
     
     public static void main(String[] args) {
-        Frame gameFrame = new Frame("SleutelBarricade", 900, 700);        
+        Frame gameFrame = new Frame("SleutelBarricade", 900, 700);
+        while(gameFrame.isVisible()){
+            inventory.setText(Integer.toString(sleutelBarricade.getPlayerInv()));
+        }
     }
 }
