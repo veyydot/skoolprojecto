@@ -19,10 +19,12 @@ public class Player extends GameObject {
     private final String Player_IMG_PATH = "src/images/Player.jpeg";
     private BufferedImage Player = null;
     private boolean possible = false;
+    private SleutelBarricade sleutelBarricade;
        
-    public Player(String objectName, int x, int y) {
+    public Player(String objectName, int x, int y,SleutelBarricade sleutelBarricade){
         super(objectName, x, y);
         this.inventory = 0;
+        this.sleutelBarricade = sleutelBarricade;
     }
     
     @Override
@@ -77,7 +79,6 @@ public class Player extends GameObject {
                     case "Barricade":
                         unlockBarricade(playField[xPos][yPos-1], objectArray);
                         break;
-                    
                 }
             }else{
                 possible = true;
@@ -97,6 +98,7 @@ public class Player extends GameObject {
                         break;
                     case "EndPoint":
                         JOptionPane.showMessageDialog(null, "Endpoint reached!");
+                        sleutelBarricade.randomizeField();
                         break;    
                     }
                 }else{
@@ -134,6 +136,7 @@ public class Player extends GameObject {
                         break;
                     case "EndPoint":
                         JOptionPane.showMessageDialog(null, "Endpoint reached!");
+                        sleutelBarricade.randomizeField();
                         break;
                     }
                 }else{

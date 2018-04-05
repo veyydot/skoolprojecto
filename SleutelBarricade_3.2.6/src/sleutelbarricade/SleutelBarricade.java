@@ -23,13 +23,13 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private final int barricades = 15;
     private final int keys = 5;  
     private ArrayList<GameObject> initialArray;
-    
+    //done
 //    private boolean gameState;    
     private ArrayList<GameObject> objectArray = new ArrayList<>();
     private GameObject[][] playField = new GameObject[10][10];
     private boolean[][] gameObjects = new boolean[10][10];
     private Graphics g;    
-    private Player player = new Player("Player", 37, 37);
+    private Player player = new Player("Player", 37, 37, this);
     private EndPoint endPoint = new EndPoint("EndPoint", 487, 487);
     private Timer t;
 
@@ -149,14 +149,16 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         }
         objectArray.get(0).initializeImages();
         objectArray.get(0).render(g);
-        for(int i = 2; i<keys+barricades+2; i++){
-            g.setColor(Color.BLACK);
-            if(i<keys+2){
-                g.drawString(Integer.toString(objectArray.get(i).getPassCode()), objectArray.get(i).getX(), objectArray.get(i).getY()+40);
-            }else{
-                g.drawString(Integer.toString(objectArray.get(i).getPassCode()), objectArray.get(i).getX()+7, objectArray.get(i).getY()+40);
+        
+        for(int i = 0; i<objectArray.size(); i++){
+            g.setColor(Color.black);
+            if(objectArray.get(i).getObjectName().equals("Key") || objectArray.get(i).getObjectName().equals("Barricade")){
+                if(objectArray.get(i).getObjectName().equals("Key")){
+                    g.drawString(Integer.toString(objectArray.get(i).getPassCode()), objectArray.get(i).getX(), objectArray.get(i).getY()+40);
+                }else{
+                    g.drawString(Integer.toString(objectArray.get(i).getPassCode()), objectArray.get(i).getX()+7, objectArray.get(i).getY()+40);
+                }
             }
-            
         }
     }
     
