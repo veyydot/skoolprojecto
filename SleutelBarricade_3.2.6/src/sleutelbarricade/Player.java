@@ -77,6 +77,7 @@ public class Player extends GameObject {
                     case "Barricade":
                         unlockBarricade(playField[xPos][yPos-1], objectArray);
                         break;
+                    
                 }
             }else{
                 possible = true;
@@ -114,9 +115,6 @@ public class Player extends GameObject {
                     case "Barricade":
                         unlockBarricade(playField[xPos-1][yPos], objectArray);
                         break;
-                    case "EndPoint":
-                        JOptionPane.showMessageDialog(null, "Endpoint reached!");
-                        break;    
                     }
                 }else{
                     possible = true;
@@ -183,7 +181,7 @@ public class Player extends GameObject {
             System.out.println(getInventory());
             possible = true;
         } else {
-            possible = false;
+            possible = true;
         }
         return possible;
     }

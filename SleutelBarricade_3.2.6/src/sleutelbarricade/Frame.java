@@ -33,28 +33,15 @@ public class Frame extends JFrame {
         this.add(inventory);
         
         //Add Random Button
-        JButton randomize = new JButton("Randomize Level");
-        randomize.setBounds(600, 181, 200,40);
-        randomize.setEnabled(true);
-        this.add(randomize);
-        randomize.addActionListener(new ActionListener(){
+        JButton newLevel = new JButton("New Level");
+        newLevel.setBounds(600, 181, 200,40);
+        newLevel.setEnabled(true);
+        this.add(newLevel);
+        newLevel.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 sleutelBarricade.randomizeField();
-                randomize.setFocusable(false);
-            }
-        });
-        
-        //Add Reset Button
-        JButton reset = new JButton("Reset Level");
-        reset.setBounds(600, 231, 200, 40);
-        reset.setEnabled(true);
-        this.add(reset);
-        reset.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sleutelBarricade.resetLevel();
-                randomize.setFocusable(false);
+                newLevel.setFocusable(false);
             }
         });
         
