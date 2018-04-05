@@ -7,6 +7,7 @@ import java.awt.Graphics;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public abstract class GameObject {
+    
     protected String objectName;
     protected int x;
     protected int y;

@@ -12,8 +12,8 @@ import javax.imageio.ImageIO;
  */
 public class EndPoint extends GameObject{
     
-        private final String EndPoint_IMG_PATH = "src/images/EndPoint.jpg";    
-        private BufferedImage EndPoint = null;
+    private final String EndPoint_IMG_PATH = "src/images/EndPoint.jpg";    
+    private BufferedImage EndPoint = null;
     
     public EndPoint(String objectName, int x, int y) {
         super(objectName, x, y);
@@ -32,5 +32,4 @@ public class EndPoint extends GameObject{
     public void render(Graphics g) {
         g.drawImage(EndPoint, x, y, null);
     }
-    
 }

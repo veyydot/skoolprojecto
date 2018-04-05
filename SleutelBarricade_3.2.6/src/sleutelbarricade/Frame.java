@@ -12,10 +12,12 @@ import javax.swing.border.TitledBorder;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public class Frame extends JFrame {
+    
     private Graphics g;
     private static SleutelBarricade sleutelBarricade = new SleutelBarricade();
     private final String invIcon_IMG_PATH = "src/images/Key.jpeg";
     private static JLabel inventory;
+    
     public Frame(String title, int width, int height){           
         this.setTitle(title);
         

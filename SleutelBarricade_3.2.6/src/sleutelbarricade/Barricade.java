@@ -32,5 +32,4 @@ public class Barricade extends GameObject{
     public void render(Graphics g) {
         g.drawImage(Barricade, x, y, null);
     }
-    
 }

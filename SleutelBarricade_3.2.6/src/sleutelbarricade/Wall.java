@@ -32,5 +32,4 @@ public class Wall extends GameObject{
     public void render(Graphics g) {
         g.drawImage(Wall, x, y, null);
     }
-    
 }

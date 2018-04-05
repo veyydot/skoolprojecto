@@ -17,14 +17,11 @@ import javax.swing.Timer;
  * @author Tom Spek, Colin Werkhoven, Vedat Yilmaz
  */
 public class SleutelBarricade extends JComponent implements KeyListener, ActionListener{
-     
-//    private String difficulty;
+    
     private final int walls = 15;
     private final int barricades = 15;
     private final int keys = 5;  
     private ArrayList<GameObject> initialArray;
-    //done
-//    private boolean gameState;    
     private ArrayList<GameObject> objectArray = new ArrayList<>();
     private GameObject[][] playField = new GameObject[10][10];
     private boolean[][] gameObjects = new boolean[10][10];
@@ -56,16 +53,6 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     public int pixelToPositionY(int pixels){
         int yPosition = (pixels - 37)/50;
         return yPosition;
-    }
-    
-    public void resetLevel(){
-        objectArray.clear();
-        
-        for(int i = 0; i<initialArray.size(); i++){  
-            initialArray.get(i).initializeImages();
-            initialArray.get(i).render(g);
-        }
-        System.out.println("worked");
     }
     
     //Randomize All Objects To The ArrayList
@@ -127,8 +114,6 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             objectArray.add(new Wall("Wall", positionToPixel(x), positionToPixel(y)));
             playField[x][y] = objectArray.get(i+keys+barricades+2);
         }
-        
-        initialArray = new ArrayList<>(objectArray);
     }
            
     //Paint playField
@@ -143,14 +128,11 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 g.fillRect(31+columnPosition, 31+rowPosition, 48, 48);
             }
         }
+        //Add All Objects to GameField + passCode if possible
         for(int i = 1; i<objectArray.size(); i++){
             objectArray.get(i).initializeImages();
             objectArray.get(i).render(g);
-        }
-        objectArray.get(0).initializeImages();
-        objectArray.get(0).render(g);
-        
-        for(int i = 0; i<objectArray.size(); i++){
+            
             g.setColor(Color.black);
             if(objectArray.get(i).getObjectName().equals("Key") || objectArray.get(i).getObjectName().equals("Barricade")){
                 if(objectArray.get(i).getObjectName().equals("Key")){
@@ -160,18 +142,19 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 }
             }
         }
+        objectArray.get(0).initializeImages();
+        objectArray.get(0).render(g);
     }
     
     //KeyListener
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        
         int x = pixelToPositionX(player.getX());
         int y = pixelToPositionY(player.getY());
         
         boolean possible;
+        String notPossibleMessage = "Player didn't move!";
         if(keyCode == KeyEvent.VK_UP) {
-            System.out.println("UP");
             if(y>=1){                
                 possible = player.movePossible(objectArray, playField, gameObjects, "UP");
                 if(possible){
@@ -182,13 +165,12 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     gameObjects[x][y] = false;
                     y-=1;
                 }else{
-                    System.out.println("Player didn't move!");
+                    System.out.println(notPossibleMessage);
                 }
             }   
         }
         
         if(keyCode == KeyEvent.VK_DOWN) {
-            System.out.println("DOWN");
             if(y<=8){
                 possible = player.movePossible(objectArray, playField, gameObjects, "DOWN");
                 if(possible){
@@ -199,13 +181,12 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     gameObjects[x][y] = false;
                     y+=1;
                 }else{
-                    System.out.println("Player didn't move!");
+                    System.out.println(notPossibleMessage);
                 }   
             }
         }
 
         if(keyCode == KeyEvent.VK_LEFT) {
-            System.out.println("LEFT");
             if(x>=1){
                 possible = player.movePossible(objectArray, playField, gameObjects, "LEFT");
                 if(possible){
@@ -216,13 +197,12 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     gameObjects[x][y] = false;
                     x-=1;
                 }else{
-                    System.out.println("Player didn't move!");
+                    System.out.println(notPossibleMessage);
                 }
             }   
         }
         
         if(keyCode == KeyEvent.VK_RIGHT) {
-            System.out.println("RIGHT");
             if(x<=8){
                 possible = player.movePossible(objectArray, playField, gameObjects, "RIGHT");
                 if(possible){
@@ -233,7 +213,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                     x+=1;
                     player.move(e);
                 }else{
-                    System.out.println("Player didn't move!");
+                    System.out.println(notPossibleMessage);
                 }
             }
         }
