@@ -98,8 +98,7 @@ public class Player extends GameObject {
                             unlockBarricade(playField[xPos][yPos+1], objectArray);
                             break;
                         case "EndPoint":
-                            JOptionPane.showMessageDialog(null, "Endpoint reached!");
-                            sleutelBarricade.randomizeField();
+                            JOptionPane.showMessageDialog(null, "Endpoint reached! Play again? Click 'New Level!'");
                             break;    
                         }
                     }else{
@@ -136,8 +135,7 @@ public class Player extends GameObject {
                             unlockBarricade(playField[xPos+1][yPos], objectArray);
                             break;
                         case "EndPoint":
-                            JOptionPane.showMessageDialog(null, "Endpoint reached!");
-                            sleutelBarricade.randomizeField();
+                            JOptionPane.showMessageDialog(null, "Endpoint reached! Play again? Click 'New Level!'");
                             break;
                         }
                     }else{
