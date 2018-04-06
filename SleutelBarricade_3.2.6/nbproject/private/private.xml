@@ -4,6 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/tomsp/Documents/GitHub/skoolprojecto/SleutelBarricade_3.2.6/test/sleutelbarricade/SleutelBarricadeTest.java</file>
+            <file>file:/C:/Users/tomsp/Documents/GitHub/skoolprojecto/SleutelBarricade_3.2.6/src/sleutelbarricade/Key.java</file>
+            <file>file:/C:/Users/tomsp/Documents/GitHub/skoolprojecto/SleutelBarricade_3.2.6/src/sleutelbarricade/SleutelBarricade.java</file>
+            <file>file:/C:/Users/tomsp/Documents/GitHub/skoolprojecto/SleutelBarricade_3.2.6/src/sleutelbarricade/Barricade.java</file>
+            <file>file:/C:/Users/tomsp/Documents/GitHub/skoolprojecto/SleutelBarricade_3.2.6/src/sleutelbarricade/Player.java</file>
+            <file>file:/C:/Users/tomsp/Documents/GitHub/skoolprojecto/SleutelBarricade_3.2.6/src/sleutelbarricade/GameObject.java</file>
+            <file>file:/C:/Users/tomsp/Documents/GitHub/skoolprojecto/SleutelBarricade_3.2.6/src/sleutelbarricade/Wall.java</file>
+            <file>file:/C:/Users/tomsp/Documents/GitHub/skoolprojecto/SleutelBarricade_3.2.6/src/sleutelbarricade/EndPoint.java</file>
         </group>
     </open-files>
 </project-private>
