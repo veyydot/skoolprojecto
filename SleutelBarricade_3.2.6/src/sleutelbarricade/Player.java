@@ -1,7 +1,6 @@
 package sleutelbarricade;
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -44,33 +43,36 @@ public class Player extends GameObject {
         g.drawImage(Player, x, y, null);
     }
     
-    public void move(GameObject[][] playField, KeyEvent e) {
-        int keyCode = e.getKeyCode();
+    public void move(GameObject[][] playField, ArrayList<GameObject> objectArray, String direction) {
         int xPos = sleutelBarricade.pixelToPositionX(getX());
         int yPos = sleutelBarricade.pixelToPositionY(getY());
-        
-        switch (keyCode) {
-            case KeyEvent.VK_DOWN:
-                if(yPos <= 8){
+        String notPossibleMessage = "Player didn't move!";
+        possible = movePossible(objectArray, playField, direction);
+
+        switch (direction) {
+            case "DOWN":
+                if(possible){
                     playField[xPos][yPos+1] = playField[xPos][yPos];
                     playField[xPos][yPos] = null;
                     yPos+=1;
                     x += 0;
                     y += 50;
                 }
-                
                 break;
-            case KeyEvent.VK_UP:
-                if(yPos >= 1){
+            case "UP":
+                if(possible){
                     playField[xPos][yPos-1] = playField[xPos][yPos];
                     playField[xPos][yPos] = null;
                     yPos-=1;
                     x += 0;
                     y -= 50;
+
+                }else{
+                    System.out.println(notPossibleMessage);
                 }
                 break;
-            case KeyEvent.VK_RIGHT:
-                if(xPos <= 8){
+            case "RIGHT":
+                if(possible){
                     playField[xPos+1][yPos] = playField[xPos][yPos];
                     playField[xPos][yPos] = null;
                     xPos+=1; 
@@ -78,8 +80,8 @@ public class Player extends GameObject {
                     y += 0;
                 }
                 break;
-            case KeyEvent.VK_LEFT:
-                if(xPos >= 1){
+            case "LEFT":
+                if(possible){
                     playField[xPos-1][yPos] = playField[xPos][yPos];
                     playField[xPos][yPos] = null;
                     xPos-=1;   
@@ -199,7 +201,7 @@ public class Player extends GameObject {
     public boolean pickUpKey(GameObject objectPos, ArrayList<GameObject> objectArray){
         int n = JOptionPane.showOptionDialog(null, "Would you like to pick up the key with code: " + objectPos.getPassCode(),
         "Key pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-        null, options, "No");
+        null, options, "Yes");
         
         if (n == 0) {
             objectArray.remove(objectArray.indexOf(objectPos));

@@ -20,14 +20,13 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     
     private final int walls = 15;
     private final int barricades = 15;
-    private final int keys = 5;  
-    private ArrayList<GameObject> initialArray;
-    private ArrayList<GameObject> objectArray = new ArrayList<>();
-    private GameObject[][] playField = new GameObject[10][10];
+    private final int keys = 5;
+    private final ArrayList<GameObject> objectArray = new ArrayList<>();
+    private final GameObject[][] playField = new GameObject[10][10];
     private Graphics g;    
-    private Player player = new Player("Player", 37, 37, this);
-    private EndPoint endPoint = new EndPoint("EndPoint", 487, 487);
-    private Timer t;
+    private final Player player = new Player("Player", 37, 37, this);
+    private final EndPoint endPoint = new EndPoint("EndPoint", 487, 487);
+    private final Timer t;
 
     public SleutelBarricade(){
         this.t = new Timer(5, this);
@@ -57,9 +56,9 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     //Randomize All Objects To The ArrayList
     public void randomizeField(){
         objectArray.clear();
-        for(int i = 0; i<playField.length; i++){
-            for(int j = 0; j<playField[i].length; j++){
-                playField[i][j] = null;
+        for (GameObject[] playField1 : playField) {
+            for (int j = 0; j < playField1.length; j++) {
+                playField1[j] = null;
             }
         }
         player.setInventory(new Key("Key", 0, 0, 0));
@@ -172,43 +171,21 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     //KeyListener
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        boolean possible;
-        String notPossibleMessage = "Player didn't move!";
+        
         if(keyCode == KeyEvent.VK_UP) {
-            possible = player.movePossible(objectArray, playField, "UP");
-            if(possible){
-                player.move(playField, e);
-            }else{
-                System.out.println(notPossibleMessage);
-            }
+            player.move(playField, objectArray, "UP");
         }
         
         if(keyCode == KeyEvent.VK_DOWN) {
-            possible = player.movePossible(objectArray, playField, "DOWN");
-            if(possible){
-                player.move(playField, e);
-            }else{
-                System.out.println(notPossibleMessage);
-            }   
+            player.move(playField, objectArray, "DOWN");
         }
 
         if(keyCode == KeyEvent.VK_LEFT) {
-            player.move(playField, e);
-            possible = player.movePossible(objectArray, playField, "LEFT");
-            if(possible){
-                player.move(playField, e);
-            }else{
-                System.out.println(notPossibleMessage);
-            }
+            player.move(playField, objectArray, "LEFT");
         }
         
         if(keyCode == KeyEvent.VK_RIGHT) {
-             possible = player.movePossible(objectArray, playField, "RIGHT");
-            if(possible){
-                player.move(playField, e);
-            }else{
-                System.out.println(notPossibleMessage);
-            }
+            player.move(playField, objectArray, "RIGHT");
         }
     }
     
