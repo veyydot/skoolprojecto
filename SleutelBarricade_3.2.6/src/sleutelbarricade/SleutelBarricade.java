@@ -193,6 +193,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         }
 
         if(keyCode == KeyEvent.VK_LEFT) {
+            player.move(playField, e);
             possible = player.movePossible(objectArray, playField, "LEFT");
             if(possible){
                 player.move(playField, e);
@@ -202,7 +203,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         }
         
         if(keyCode == KeyEvent.VK_RIGHT) {
-            possible = player.movePossible(objectArray, playField, "RIGHT");
+             possible = player.movePossible(objectArray, playField, "RIGHT");
             if(possible){
                 player.move(playField, e);
             }else{

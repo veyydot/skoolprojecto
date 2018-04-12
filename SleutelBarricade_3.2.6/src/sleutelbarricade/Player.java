@@ -21,6 +21,7 @@ public class Player extends GameObject {
     private Key inventory;
     private boolean possible = false;
     private BufferedImage Player = null;
+    private Graphics g;
        
     public Player(String objectName, int x, int y,SleutelBarricade sleutelBarricade){
         super(objectName, x, y);
@@ -44,42 +45,50 @@ public class Player extends GameObject {
     
     public void move(GameObject[][] playField, KeyEvent e) {
         int keyCode = e.getKeyCode();
-        int x = sleutelBarricade.pixelToPositionX(getX());
-        int y = sleutelBarricade.pixelToPositionY(getY());
+        int xPos = sleutelBarricade.pixelToPositionX(getX());
+        int yPos = sleutelBarricade.pixelToPositionY(getY());
         
         switch (keyCode) {
             case KeyEvent.VK_DOWN:
-                if(y <= 8){
-                    playField[x][y+1] = playField[x][y];
-                    playField[x][y] = null;
-                    y+=1;
+                System.out.println(possible);
+                if(yPos <= 8){
+                    System.out.println("DOWN");
+                    playField[xPos][yPos+1] = playField[xPos][yPos];
+                    playField[xPos][yPos] = null;
+                    yPos+=1;
                 }
                 x += 0;
                 y += 50;
                 break;
             case KeyEvent.VK_UP:
-                if(y >= 1){
-                    playField[x][y-1] = playField[x][y];
-                    playField[x][y] = null;
-                    y-=1;
+                System.out.println(possible);
+                if(yPos >= 1){
+                    System.out.println("UP");
+                    playField[xPos][yPos-1] = playField[xPos][yPos];
+                    playField[xPos][yPos] = null;
+                    yPos-=1;
                 }
                 x += 0;
                 y -= 50;
                 break;
             case KeyEvent.VK_RIGHT:
-                if(x <= 8){
-                    playField[x+1][y] = playField[x][y];
-                    playField[x][y] = null;
-                    x+=1;
+                System.out.println(possible);
+                if(xPos <= 8){
+                    System.out.println("RIGHT");
+                    playField[xPos+1][yPos] = playField[xPos][yPos];
+                    playField[xPos][yPos] = null;
+                    xPos+=1;
                 }
                 x += 50;
                 y += 0;
                 break;
             case KeyEvent.VK_LEFT:
-                if(x >= 1){
-                    playField[x-1][y] = playField[x][y];
-                    playField[x][y] = null;
-                    x-=1;
+                System.out.println(possible);
+                if(xPos >= 1){
+                    System.out.println("LEFT");
+                    playField[xPos-1][yPos] = playField[xPos][yPos];
+                    playField[xPos][yPos] = null;
+                    xPos-=1;
                 }
                 x -= 50;
                 y += 0;
@@ -92,81 +101,119 @@ public class Player extends GameObject {
         int yPos = sleutelBarricade.pixelToPositionY(getY());
         switch (direction) {
             case "UP":
-                if (playField[xPos][yPos - 1] != null) {
-                    switch (playField[xPos][yPos - 1].getObjectName()) {
-                        case "Wall":
-                            wallInteraction();
-                            break;
-                        case "Key":
-                            pickUpKey(playField[xPos][yPos-1], objectArray);
-                            break;
-                        case "Barricade":
-                            unlockBarricade(playField[xPos][yPos-1], objectArray);
-                            break;
+                if(yPos >= 1){
+                    if(playField[xPos][yPos-1] == null){
+                        possible = true;
+                    }else{
+                        possible = false;
                     }
-                }else{
-                    possible = true;
                 }
                 break;
             case "DOWN":
-                if (playField[xPos][yPos + 1] != null) {
-                    switch (playField[xPos][yPos + 1].getObjectName()) {
-                        case "Wall":
-                            wallInteraction();
-                            break;
-                        case "Key":
-                            pickUpKey(playField[xPos][yPos+1], objectArray);
-                            break;  
-                        case "Barricade":
-                            unlockBarricade(playField[xPos][yPos+1], objectArray);
-                            break;
-                        case "EndPoint":
-                            JOptionPane.showMessageDialog(null, "Endpoint reached! Play again? Click 'New Level!'");
-                            break;    
-                        }
-                    }else{
+                if(yPos <= 8){
+                    if(playField[xPos][yPos+1] == null){
                         possible = true;
+                    }else{
+                        possible = false;
                     }
+                }
                 break;
             case "LEFT":
-                if (playField[xPos - 1][yPos] != null) {
-                    switch (playField[xPos - 1][yPos].getObjectName()) {
-                        case "Wall":
-                            wallInteraction();
-                            break;
-                        case "Key":
-                            pickUpKey(playField[xPos-1][yPos],objectArray);
-                            break;
-                        case "Barricade":
-                            unlockBarricade(playField[xPos-1][yPos], objectArray);
-                            break;
-                        }
-                    }else{
+                if(xPos >= 1){
+                    if(playField[xPos-1][yPos] == null){
                         possible = true;
-                    } 
+                    }else{
+                        possible = false;
+                    }
+                }
                 break;
             case "RIGHT":
-                if (playField[xPos + 1][yPos] != null) {
-                    switch (playField[xPos + 1][yPos].getObjectName()) {
-                        case "Wall":
-                            wallInteraction();
-                            break;
-                        case "Key":
-                            pickUpKey(playField[xPos+1][yPos], objectArray);
-                            break;
-                        case "Barricade":
-                            unlockBarricade(playField[xPos+1][yPos], objectArray);
-                            break;
-                        case "EndPoint":
-                            JOptionPane.showMessageDialog(null, "Endpoint reached! Play again? Click 'New Level!'");
-                            break;
-                        }
-                    }else{
+                if(xPos <= 8){
+                    if(playField[xPos+1][yPos] == null){
                         possible = true;
+                    }else{
+                        possible = false;
                     }
-                break;
-            }
+                }
+                
+        }
         return possible;
+
+//            case "UP":
+//                if (playField[xPos][yPos - 1] == null) {
+//                    switch (playField[xPos][yPos - 1].getObjectName()) {
+//                        case "Wall":
+//                            wallInteraction();
+//                            break;
+//                        case "Key":
+//                            pickUpKey(playField[xPos][yPos-1], objectArray);
+//                            break;
+//                        case "Barricade":
+//                            unlockBarricade(playField[xPos][yPos-1], objectArray);
+//                            break;
+//                    }
+//                }else{
+//                    possible = true;
+//                }
+//                break;
+//            case "DOWN":
+//                if (playField[xPos][yPos + 1] == null) {
+//                    switch (playField[xPos][yPos + 1].getObjectName()) {
+//                        case "Wall":
+//                            wallInteraction();
+//                            break;
+//                        case "Key":
+//                            pickUpKey(playField[xPos][yPos+1], objectArray);
+//                            break;  
+//                        case "Barricade":
+//                            unlockBarricade(playField[xPos][yPos+1], objectArray);
+//                            break;
+//                        case "EndPoint":
+//                            JOptionPane.showMessageDialog(null, "Endpoint reached! Play again? Click 'New Level!'");
+//                            break;    
+//                        }
+//                    }else{
+//                        possible = true;
+//                    }
+//                break;
+//            case "LEFT":
+//                if (playField[xPos - 1][yPos] == null) {
+//                    switch (playField[xPos - 1][yPos].getObjectName()) {
+//                        case "Wall":
+//                            wallInteraction();
+//                            break;
+//                        case "Key":
+//                            pickUpKey(playField[xPos-1][yPos],objectArray);
+//                            break;
+//                        case "Barricade":
+//                            unlockBarricade(playField[xPos-1][yPos], objectArray);
+//                            break;
+//                        }
+//                    }else{
+//                        possible = true;
+//                    } 
+//                break;
+//            case "RIGHT":
+//                if (playField[xPos + 1][yPos] == null) {
+//                    switch (playField[xPos + 1][yPos].getObjectName()) {
+//                        case "Wall":
+//                            wallInteraction();
+//                            break;
+//                        case "Key":
+//                            pickUpKey(playField[xPos+1][yPos], objectArray);
+//                            break;
+//                        case "Barricade":
+//                            unlockBarricade(playField[xPos+1][yPos], objectArray);
+//                            break;
+//                        case "EndPoint":
+//                            JOptionPane.showMessageDialog(null, "Endpoint reached! Play again? Click 'New Level!'");
+//                            break;
+//                        }
+//                    }else{
+//                        possible = true;
+//                    }
+//                break;
+//            }
     }
     
     public boolean wallInteraction() {
