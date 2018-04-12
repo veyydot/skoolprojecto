@@ -17,7 +17,6 @@ public class Barricade extends GameObject{
     private final String Barricade_IMG_PATH = "src/images/Barricade.jpg";    
     private BufferedImage Barricade = null;
     private final Object[] options = {"Yes", "No"};
-    private SleutelBarricade sb;
     private boolean possible;
     
     public Barricade(String objectName, int x, int y, int passCode) {
