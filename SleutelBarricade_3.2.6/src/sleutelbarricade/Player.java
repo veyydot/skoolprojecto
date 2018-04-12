@@ -42,34 +42,57 @@ public class Player extends GameObject {
         g.drawImage(Player, x, y, null);
     }
     
-    public void move(KeyEvent e) {
+    public void move(GameObject[][] playField, KeyEvent e) {
         int keyCode = e.getKeyCode();
+        int x = sleutelBarricade.pixelToPositionX(getX());
+        int y = sleutelBarricade.pixelToPositionY(getY());
+        
         switch (keyCode) {
             case KeyEvent.VK_DOWN:
+                if(y <= 8){
+                    playField[x][y+1] = playField[x][y];
+                    playField[x][y] = null;
+                    y+=1;
+                }
                 x += 0;
                 y += 50;
                 break;
             case KeyEvent.VK_UP:
+                if(y >= 1){
+                    playField[x][y-1] = playField[x][y];
+                    playField[x][y] = null;
+                    y-=1;
+                }
                 x += 0;
                 y -= 50;
                 break;
             case KeyEvent.VK_RIGHT:
+                if(x <= 8){
+                    playField[x+1][y] = playField[x][y];
+                    playField[x][y] = null;
+                    x+=1;
+                }
                 x += 50;
                 y += 0;
                 break;
             case KeyEvent.VK_LEFT:
+                if(x >= 1){
+                    playField[x-1][y] = playField[x][y];
+                    playField[x][y] = null;
+                    x-=1;
+                }
                 x -= 50;
                 y += 0;
                 break;
         }
     }
           
-    public boolean movePossible(ArrayList<GameObject> objectArray, GameObject[][] playField, boolean[][] board, String direction) {
-        int xPos = (getX() - 37) / 50;
-        int yPos = (getY() - 37) / 50;
+    public boolean movePossible(ArrayList<GameObject> objectArray, GameObject[][] playField, String direction) {
+        int xPos = sleutelBarricade.pixelToPositionX(getX());
+        int yPos = sleutelBarricade.pixelToPositionY(getY());
         switch (direction) {
             case "UP":
-                if (board[xPos][yPos - 1] == true) {
+                if (playField[xPos][yPos - 1] != null) {
                     switch (playField[xPos][yPos - 1].getObjectName()) {
                         case "Wall":
                             wallInteraction();
@@ -86,7 +109,7 @@ public class Player extends GameObject {
                 }
                 break;
             case "DOWN":
-                if (board[xPos][yPos + 1] == true) {
+                if (playField[xPos][yPos + 1] != null) {
                     switch (playField[xPos][yPos + 1].getObjectName()) {
                         case "Wall":
                             wallInteraction();
@@ -106,7 +129,7 @@ public class Player extends GameObject {
                     }
                 break;
             case "LEFT":
-                if (board[xPos - 1][yPos] == true) {
+                if (playField[xPos - 1][yPos] != null) {
                     switch (playField[xPos - 1][yPos].getObjectName()) {
                         case "Wall":
                             wallInteraction();
@@ -123,7 +146,7 @@ public class Player extends GameObject {
                     } 
                 break;
             case "RIGHT":
-                if (board[xPos + 1][yPos] == true) {
+                if (playField[xPos + 1][yPos] != null) {
                     switch (playField[xPos + 1][yPos].getObjectName()) {
                         case "Wall":
                             wallInteraction();

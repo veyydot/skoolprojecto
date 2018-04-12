@@ -24,7 +24,6 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     private ArrayList<GameObject> initialArray;
     private ArrayList<GameObject> objectArray = new ArrayList<>();
     private GameObject[][] playField = new GameObject[10][10];
-    private boolean[][] gameObjects = new boolean[10][10];
     private Graphics g;    
     private Player player = new Player("Player", 37, 37, this);
     private EndPoint endPoint = new EndPoint("EndPoint", 487, 487);
@@ -61,7 +60,6 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         for(int i = 0; i<playField.length; i++){
             for(int j = 0; j<playField[i].length; j++){
                 playField[i][j] = null;
-                gameObjects[i][j] = false;
             }
         }
         player.setInventory(new Key("Key", 0, 0, 0));
@@ -71,19 +69,26 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         player.setY(positionToPixel(0));
         playField[0][0] = player;
         playField[9][9] = endPoint;
-        gameObjects[0][0] = true;
-        gameObjects[9][9] = true;
         
         //Add Keys to ArrayList
         for(int  i = 0 ; i< keys ; i++){
             int x = 0 ;
             int y = 0;
             int passCode = ThreadLocalRandom.current().nextInt(1,4)*100;
-            while(gameObjects[x][y]){
-                x = new Random().nextInt(gameObjects.length);
-                y = new Random().nextInt(gameObjects[x].length);
+            while(playField[x][y] != null){
+                x = new Random().nextInt(playField.length);
+                switch (x) {
+                    case 0:
+                        y = ThreadLocalRandom.current().nextInt(1, 10);
+                        break;
+                    case 9:
+                        y = ThreadLocalRandom.current().nextInt(0, 9);
+                        break;
+                    default:
+                        y = ThreadLocalRandom.current().nextInt(0, 10);
+                        break;
+                }
             }
-            gameObjects[x][y] = true;
             objectArray.add(new Key("Key", positionToPixel(x), positionToPixel(y), passCode));             
             playField[x][y] = objectArray.get(i+2);
         }
@@ -93,11 +98,20 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
             int x = 0;
             int y = 0;
             int passCode = ThreadLocalRandom.current().nextInt(1,4)*100;
-            while(gameObjects[x][y]){
-                x = new Random().nextInt(gameObjects.length);
-                y = new Random().nextInt(gameObjects[x].length);
+            while(playField[x][y] != null){
+                x = new Random().nextInt(playField.length);
+                switch (x) {
+                    case 0:
+                        y = ThreadLocalRandom.current().nextInt(1, 10);
+                        break;
+                    case 9:
+                        y = ThreadLocalRandom.current().nextInt(0, 9);
+                        break;
+                    default:
+                        y = ThreadLocalRandom.current().nextInt(0, 10);
+                        break;
+                }
             }
-            gameObjects[x][y] = true;
             objectArray.add(new Barricade("Barricade", positionToPixel(x), positionToPixel(y),passCode));
             playField[x][y] = objectArray.get(i+keys+2);
         }
@@ -106,11 +120,20 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         for(int i = 0; i<walls; i++){
             int x = 0;
             int y = 0;
-            while(gameObjects[x][y]){
-                x = new Random().nextInt(gameObjects.length);
-                y = new Random().nextInt(gameObjects[x].length);
+            while(playField[x][y] != null){
+                x = new Random().nextInt(playField.length);
+                switch (x) {
+                    case 0:
+                        y = ThreadLocalRandom.current().nextInt(1, 10);
+                        break;
+                    case 9:
+                        y = ThreadLocalRandom.current().nextInt(0, 9);
+                        break;
+                    default:
+                        y = ThreadLocalRandom.current().nextInt(0, 10);
+                        break;
+                }
             }
-            gameObjects[x][y] = true;
             objectArray.add(new Wall("Wall", positionToPixel(x), positionToPixel(y)));
             playField[x][y] = objectArray.get(i+keys+barricades+2);
         }
@@ -149,72 +172,41 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
     //KeyListener
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        int x = pixelToPositionX(player.getX());
-        int y = pixelToPositionY(player.getY());
-        
         boolean possible;
         String notPossibleMessage = "Player didn't move!";
         if(keyCode == KeyEvent.VK_UP) {
-            if(y>=1){                
-                possible = player.movePossible(objectArray, playField, gameObjects, "UP");
-                if(possible){
-                    player.move(e);
-                    playField[x][y-1] = playField[x][y];
-                    playField[x][y] = null;
-                    gameObjects[x][y-1] = true;
-                    gameObjects[x][y] = false;
-                    y-=1;
-                }else{
-                    System.out.println(notPossibleMessage);
-                }
-            }   
+            possible = player.movePossible(objectArray, playField, "UP");
+            if(possible){
+                player.move(playField, e);
+            }else{
+                System.out.println(notPossibleMessage);
+            }
         }
         
         if(keyCode == KeyEvent.VK_DOWN) {
-            if(y<=8){
-                possible = player.movePossible(objectArray, playField, gameObjects, "DOWN");
-                if(possible){
-                    player.move(e);
-                    playField[x][y+1] = playField[x][y];
-                    playField[x][y] = null;
-                    gameObjects[x][y+1] = true;
-                    gameObjects[x][y] = false;
-                    y+=1;
-                }else{
-                    System.out.println(notPossibleMessage);
-                }   
-            }
+            possible = player.movePossible(objectArray, playField, "DOWN");
+            if(possible){
+                player.move(playField, e);
+            }else{
+                System.out.println(notPossibleMessage);
+            }   
         }
 
         if(keyCode == KeyEvent.VK_LEFT) {
-            if(x>=1){
-                possible = player.movePossible(objectArray, playField, gameObjects, "LEFT");
-                if(possible){
-                    player.move(e);
-                    playField[x-1][y] = playField[x][y];
-                    playField[x][y] = null;
-                    gameObjects[x-1][y] = true;
-                    gameObjects[x][y] = false;
-                    x-=1;
-                }else{
-                    System.out.println(notPossibleMessage);
-                }
-            }   
+            possible = player.movePossible(objectArray, playField, "LEFT");
+            if(possible){
+                player.move(playField, e);
+            }else{
+                System.out.println(notPossibleMessage);
+            }
         }
         
         if(keyCode == KeyEvent.VK_RIGHT) {
-            if(x<=8){
-                possible = player.movePossible(objectArray, playField, gameObjects, "RIGHT");
-                if(possible){
-                    playField[x+1][y] = playField[x][y];
-                    playField[x][y] = null;
-                    gameObjects[x+1][y] = true;
-                    gameObjects[x][y] = false;
-                    x+=1;
-                    player.move(e);
-                }else{
-                    System.out.println(notPossibleMessage);
-                }
+            possible = player.movePossible(objectArray, playField, "RIGHT");
+            if(possible){
+                player.move(playField, e);
+            }else{
+                System.out.println(notPossibleMessage);
             }
         }
     }
