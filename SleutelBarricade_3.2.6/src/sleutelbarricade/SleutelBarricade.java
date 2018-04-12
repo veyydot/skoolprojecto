@@ -64,7 +64,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
                 gameObjects[i][j] = false;
             }
         }
-        player.setInventory(0);
+        player.setInventory(new Key("Key", 0, 0, 0));
         objectArray.add(player);
         objectArray.add(endPoint);
         player.setX(positionToPixel(0));
@@ -231,7 +231,7 @@ public class SleutelBarricade extends JComponent implements KeyListener, ActionL
         
     }
     
-    public int getPlayerInventory(){
+    public Key getPlayerInventory(){
         return player.getInventory();
     }
 }

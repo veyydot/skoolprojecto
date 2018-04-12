@@ -28,8 +28,8 @@ public class Frame extends JFrame {
         
         //Add control buttons and other graphics to the field
         ImageIcon invIcon = new ImageIcon(invIcon_IMG_PATH);
-        inventory = new JLabel(invIcon, sleutelBarricade.getPlayerInventory());
-        inventory.setText(Integer.toString(sleutelBarricade.getPlayerInventory()));
+        inventory = new JLabel(invIcon, sleutelBarricade.getPlayerInventory().getPassCode());
+        inventory.setText(Integer.toString(sleutelBarricade.getPlayerInventory().getPassCode()));
         inventory.setBounds(600,31,200,100);
         inventory.setBorder(new TitledBorder("Inventory"));
         this.add(inventory);
@@ -61,7 +61,7 @@ public class Frame extends JFrame {
     public static void main(String[] args) {
         Frame gameFrame = new Frame("SleutelBarricade", 900, 700);
         while(gameFrame.isVisible()){
-            inventory.setText(Integer.toString(sleutelBarricade.getPlayerInventory()));
+            inventory.setText(Integer.toString(sleutelBarricade.getPlayerInventory().getPassCode()));
         }
     }
 }

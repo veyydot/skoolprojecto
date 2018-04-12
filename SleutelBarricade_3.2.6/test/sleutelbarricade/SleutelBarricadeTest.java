@@ -21,12 +21,12 @@ public class SleutelBarricadeTest {
         assertEquals(expected, result);
     }
     
-    @Test
-    public void positionToPixelIncorrect() {
-        int expected = 37;
-        int result = sb.positionToPixel(1);
-        assertEquals(expected, result);
-    }
+//    @Test
+//    public void positionToPixelIncorrect() {
+//        int expected = 37;
+//        int result = sb.positionToPixel(1);
+//        assertEquals(expected, result);
+//    }
     
     @Test
     public void pixelToPositionCorrect(){
@@ -35,12 +35,12 @@ public class SleutelBarricadeTest {
         assertEquals(expected,result);
     }
     
-    @Test
-    public void pixelToPositionIncorrect(){
-        int expected = 0;
-        int result = sb.pixelToPositionX(87);
-        assertEquals(expected,result);
-    }
+//    @Test
+//    public void pixelToPositionIncorrect(){
+//        int expected = 0;
+//        int result = sb.pixelToPositionX(87);
+//        assertEquals(expected,result);
+//    }
     
     @Test
     public void moveUpToFilledLocationCorrect(){

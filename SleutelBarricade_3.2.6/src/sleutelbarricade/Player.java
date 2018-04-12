@@ -18,13 +18,13 @@ public class Player extends GameObject {
     private final SleutelBarricade sleutelBarricade;
     private final Object[] options = {"Yes", "No"};
     private final String Player_IMG_PATH = "src/images/Player.jpeg";
-    private int inventory;
+    private Key inventory;
     private boolean possible = false;
     private BufferedImage Player = null;
        
     public Player(String objectName, int x, int y,SleutelBarricade sleutelBarricade){
         super(objectName, x, y);
-        this.inventory = 0;
+        this.inventory = new Key("Key", 0, 0, 0);
         this.sleutelBarricade = sleutelBarricade;
     }
     
@@ -156,11 +156,11 @@ public class Player extends GameObject {
         "Barricade pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
         null, options, "Yes");
         
-        if (j == 0 && getInventory() == objectPos.getPassCode()) {
+        if (j == 0 && getInventory().getPassCode() == objectPos.getPassCode()) {
             objectArray.remove(objectArray.indexOf(objectPos));
             objectPos = null;
             possible = true;
-        } else if (j == 0 && getInventory() != objectPos.getPassCode()) {
+        } else if (j == 0 && getInventory().getPassCode() != objectPos.getPassCode()) {
             JOptionPane.showMessageDialog(null, "Can't open barricade, you don't have the right key");
             possible = false;
         }else{
@@ -176,7 +176,7 @@ public class Player extends GameObject {
         
         if (n == 0) {
             objectArray.remove(objectArray.indexOf(objectPos));
-            setInventory(objectPos.getPassCode());
+            setInventory((Key) objectPos);
             objectPos = null;
             possible = true;
         } else {
@@ -205,11 +205,11 @@ public class Player extends GameObject {
         this.y = y;
     }
     
-    public int getInventory() {
+    public Key getInventory() {
         return inventory;
     }
     
-    public void setInventory(int inventory) {
+    public void setInventory(Key inventory) {
         this.inventory = inventory;
     }
 }
