@@ -38,7 +38,7 @@ public class Barricade extends GameObject{
         g.drawImage(Barricade, x, y, null);
     }
     
-    public boolean unlockBarricade(GameObject inventory, GameObject objectPos, ArrayList<GameObject> objectArray){
+    public boolean unlock(GameObject inventory, GameObject objectPos, ArrayList<GameObject> objectArray){
         int j = JOptionPane.showOptionDialog(null, "Would you like to open the barricade with code: " + objectPos.getPassCode(),
         "Barricade pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
         null, options, "Yes");

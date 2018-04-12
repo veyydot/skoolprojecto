@@ -107,7 +107,7 @@ public class Player extends GameObject {
                                 pickUpKey(playField[xPos][yPos-1], objectArray);
                                 break;
                             case "Barricade":
-                                possible = barricade.unlockBarricade(inventory, playField[xPos][yPos-1], objectArray);
+                                possible = barricade.unlock(inventory, playField[xPos][yPos-1], objectArray);
                                 break;
                         }
                     }else{
@@ -129,7 +129,7 @@ public class Player extends GameObject {
                             pickUpKey(playField[xPos][yPos+1], objectArray);
                             break;  
                         case "Barricade":
-                            possible = barricade.unlockBarricade(inventory, playField[xPos][yPos+1], objectArray);
+                            possible = barricade.unlock(inventory, playField[xPos][yPos+1], objectArray);
                             break;
                         case "EndPoint":
                             JOptionPane.showMessageDialog(null, "Endpoint reached! Play again? Click 'New Level!'");
@@ -154,7 +154,7 @@ public class Player extends GameObject {
                             pickUpKey(playField[xPos-1][yPos],objectArray);
                             break;
                         case "Barricade":
-                            possible = barricade.unlockBarricade(inventory, playField[xPos-1][yPos], objectArray);
+                            possible = barricade.unlock(inventory, playField[xPos-1][yPos], objectArray);
                             break;
                         }
                     }else{
@@ -176,7 +176,7 @@ public class Player extends GameObject {
                             pickUpKey(playField[xPos+1][yPos], objectArray);
                             break;
                         case "Barricade":
-                            possible = barricade.unlockBarricade(inventory, playField[xPos+1][yPos], objectArray);
+                            possible = barricade.unlock(inventory, playField[xPos+1][yPos], objectArray);
                             break;
                         case "EndPoint":
                             JOptionPane.showMessageDialog(null, "Endpoint reached! Play again? Click 'New Level!'");
