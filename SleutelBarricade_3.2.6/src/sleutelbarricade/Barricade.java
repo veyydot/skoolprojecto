@@ -17,7 +17,6 @@ public class Barricade extends GameObject{
     private final String Barricade_IMG_PATH = "src/images/Barricade.jpg";    
     private BufferedImage Barricade = null;
     private final Object[] options = {"Yes", "No"};
-    private SleutelBarricade sb;
     private boolean possible;
     
     public Barricade(String objectName, int x, int y, int passCode) {
@@ -38,7 +37,7 @@ public class Barricade extends GameObject{
         g.drawImage(Barricade, x, y, null);
     }
     
-    public boolean unlockBarricade(GameObject inventory, GameObject objectPos, ArrayList<GameObject> objectArray){
+    public boolean unlock(GameObject inventory, GameObject objectPos, ArrayList<GameObject> objectArray){
         int j = JOptionPane.showOptionDialog(null, "Would you like to open the barricade with code: " + objectPos.getPassCode(),
         "Barricade pop-up", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
         null, options, "Yes");
